@@ -1,22 +1,16 @@
 import React from 'react';
-import './App.css';
-import Header from './components/Header';
-import AboutSection from './components/AboutSection';
-import FeaturesSection from './components/FeaturesSection';
-import CallToAction from './components/CallToAction';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import SwipeInterface from './pages/SwipeInterface';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Header />
-      <main className="container">
-        <AboutSection />
-        <FeaturesSection />
-        <CallToAction />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/swipe" element={<SwipeInterface />} />
+      </Routes>
+    </Router>
   );
 };
 

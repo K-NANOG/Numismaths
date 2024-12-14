@@ -8,13 +8,9 @@ const CallToAction: React.FC = () => {
       <div className="nav-wrapper d-flex justify-content-center">
         <ul className="nav nav-pills" style={{ maxWidth: '250px' }}>
           <li className="nav-item">
-            <a
-              className="nav-link mb-sm-3 mb-md-0 active shadow text-center py-3"
-              href="/index.html"
-              style={{ fontSize: '1.2rem', padding: '1.5rem' }}
-            >
-              Get Started
-            </a>
+          <a className="btn btn-primary" href="/swipe">
+            Get Started
+          </a>
           </li>
         </ul>
       </div>

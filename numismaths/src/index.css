@@ -32263,5 +32263,15 @@ article a:hover {
 
 /*# sourceMappingURL=neumorphism.css.map */
 /* Card Container Styling */
+.card-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 60vh;
+  overflow: hidden;
+  margin: 2rem auto;
+}
+
+
 
 
