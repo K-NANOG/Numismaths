@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../index.css';
 
 type Concept = {
+  id: string; // Added an id property to uniquely identify each cards
   name: string;
   description: string;
   category: string;
@@ -9,11 +10,11 @@ type Concept = {
   image?: string;
 };
 
-const CardStack: React.FC = () => {
+const cardsStack: React.FC = () => {
   const [concepts, setConcepts] = useState<Concept[]>([]);
 
   useEffect(() => {
-    const loadCards = async () => {
+    const loadcardss = async () => {
       try {
         const response = await fetch('/concepts.json');
         if (!response.ok) throw new Error('Failed to fetch concepts.json');
@@ -24,31 +25,24 @@ const CardStack: React.FC = () => {
       }
     };
 
-    loadCards();
+    loadcardss();
   }, []);
 
-  const handleSwipe = (index: number, direction: 'left' | 'right') => {
-    const cardToSwipe = document.querySelectorAll<HTMLDivElement>('.card')[index];
+  const handleSwipe = (id: string, direction: 'left' | 'right') => {
+    const cardsToSwipe = document.querySelector<HTMLDivElement>(`.cards[data-id="${id}"]`);
 
-    // Add swipe animation class
-    if (cardToSwipe) {
-      cardToSwipe.style.transition = 'transform 0.5s, opacity 0.5s';
-      cardToSwipe.style.transform = direction === 'left' ? 'translateX(-200%)' : 'translateX(200%)';
-      cardToSwipe.style.opacity = '0';
+    if (cardsToSwipe) {
+      cardsToSwipe.style.transition = 'transform 0.5s, opacity 0.5s';
+      cardsToSwipe.style.transform = direction === 'left' ? 'translateX(-200%)' : 'translateX(200%)';
+      cardsToSwipe.style.opacity = '0';
     }
 
-    // Delay state update to allow animation to complete
     setTimeout(() => {
-      const updatedConcepts = concepts.filter((_, i) => i !== index);
-      setConcepts(updatedConcepts);
-
-      if (updatedConcepts.length === 0) {
-        console.log('All cards swiped');
-      }
+      setConcepts((prevConcepts) => prevConcepts.filter((concept) => concept.id !== id));
     }, 500); // Match this delay with the CSS transition duration
   };
 
-  const setupSwipeHandlers = (cardElement: HTMLDivElement, index: number) => {
+  const setupSwipeHandlers = (cardsElement: HTMLDivElement, id: string) => {
     let startX = 0;
     let currentX = 0;
     let shiftX = 0;
@@ -57,18 +51,18 @@ const CardStack: React.FC = () => {
     const onMouseDown = (e: MouseEvent) => {
       isDragging = true;
       startX = e.clientX;
-      cardElement.style.transition = 'none';
+      cardsElement.style.transition = 'none';
     };
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isDragging) return;
       currentX = e.clientX;
       shiftX = currentX - startX;
-      cardElement.style.transform = `translateX(${shiftX}px) rotate(${shiftX / 20}deg)`;
+      cardsElement.style.transform = `translateX(${shiftX}px) rotate(${shiftX / 20}deg)`;
 
-      if (shiftX > 50) cardElement.classList.add('like');
-      else if (shiftX < -50) cardElement.classList.add('dislike');
-      else cardElement.classList.remove('like', 'dislike');
+      if (shiftX > 50) cardsElement.classList.add('like');
+      else if (shiftX < -50) cardsElement.classList.add('dislike');
+      else cardsElement.classList.remove('like', 'dislike');
     };
 
     const onMouseUp = () => {
@@ -76,43 +70,45 @@ const CardStack: React.FC = () => {
       isDragging = false;
 
       if (shiftX > 100) {
-        handleSwipe(index, 'right');
+        handleSwipe(id, 'right');
       } else if (shiftX < -100) {
-        handleSwipe(index, 'left');
+        handleSwipe(id, 'left');
       } else {
-        cardElement.style.transition = 'transform 0.5s';
-        cardElement.style.transform = '';
-        cardElement.classList.remove('like', 'dislike');
+        cardsElement.style.transition = 'transform 0.5s';
+        cardsElement.style.transform = '';
+        cardsElement.classList.remove('like', 'dislike');
       }
     };
 
-    cardElement.addEventListener('mousedown', onMouseDown);
+    cardsElement.addEventListener('mousedown', onMouseDown);
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
     return () => {
-      cardElement.removeEventListener('mousedown', onMouseDown);
+      cardsElement.removeEventListener('mousedown', onMouseDown);
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
   };
 
   useEffect(() => {
-    const cardElements = document.querySelectorAll<HTMLDivElement>('.card');
-    cardElements.forEach((card, index) => {
-      setupSwipeHandlers(card, index);
+    const cardsElements = document.querySelectorAll<HTMLDivElement>('.cards');
+    cardsElements.forEach((cards) => {
+      const id = cards.getAttribute('data-id');
+      if (id) setupSwipeHandlers(cards, id);
     });
   }, [concepts]);
 
   return (
-    <div id="card-container" className="card-container">
+    <div id="cards-container" className="cards-container">
       {concepts.length === 0 ? (
-        <p>Loading cards...</p>
+        <p>No more cards...</p>
       ) : (
         concepts.map((concept, index) => (
           <div
-            key={index}
-            className="card"
+            key={concept.id} // Use the unique id for the key
+            data-id={concept.id} // Add a data-id attribute for DOM access
+            className="cards"
             style={{ zIndex: concepts.length - index }}
           >
             {concept.image && <img src={concept.image} alt={concept.name} />}
@@ -127,4 +123,4 @@ const CardStack: React.FC = () => {
   );
 };
 
-export default CardStack;
+export default cardsStack;

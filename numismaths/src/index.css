@@ -32262,18 +32262,9 @@ article a:hover {
 
 
 /*# sourceMappingURL=neumorphism.css.map */
-/* Card Container Styling */
-.card-container {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  height: 60vh;
-  overflow: hidden;
-  margin: 2rem auto;
-}
 
-/* Card Styling */
-.card-container {
+/*Card Styling*/
+.cards-container {
     position: relative;
     width: 100%;
     max-width: 400px;
@@ -32282,8 +32273,8 @@ article a:hover {
     margin: 2rem auto;
   }
   
-  .card {
-    position: absolute; /* Ensures cards stack within the container */
+  .cards {
+    position: absolute;
     width: 100%;
     height: 100%;
     background: var(--white);
@@ -32298,38 +32289,37 @@ article a:hover {
     user-select: none;
   }
   
-  .card img {
+  .cards img {
     width: 100px;
     height: 100px;
     margin-bottom: 1rem;
     object-fit: contain;
   }
   
-  .card h2 {
+  .cards h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #000;
   }
   
-  .card p {
+  .cards p {
     font-size: 1rem;
     color: var(--gray-700);
     margin-bottom: 1rem;
   }
   
-  .card .badge {
+  .cards .badge {
     font-size: 0.9rem;
     padding: 0.5rem;
   }
   
-  .card.like {
+  .cards.like {
     border: 4px solid var(--success);
   }
   
-  .card.dislike {
+  .cards.dislike {
     border: 4px solid var(--danger);
   }
-  
 
 
 

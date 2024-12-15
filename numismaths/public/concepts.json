@@ -40,5 +40,47 @@
       }
     ],
     "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_004",
+    "name": "Voronoi Diagrams",
+    "category": "Geometry",
+    "description": "Voronoi diagrams divide a space into regions based on distance to a set of points. Each region contains all points closer to its associated seed than to any other.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/VoronoiDiagram_1000.gif",
+        "description": "Visualization of a Voronoi diagram."
+      }
+    ],
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "concept_005",
+    "name": "Markov Chains",
+    "category": "Probability and Statistics",
+    "description": "Markov chains model systems that transition between states, where the probability of each state depends only on the previous state.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/MarkovChain_1000.gif",
+        "description": "Example of Markov chains."
+      }
+    ],
+    "difficulty": "Advanced"
+  },
+  {
+    "id": "concept_006",
+    "name": "Game Theory",
+    "category": "Decision Theory",
+    "description": "Game theory analyzes strategic interactions where the outcome depends on the actions of all participants.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/PrisonersDilemma_1000.gif",
+        "description": "Visualization of a game theory problem."
+      }
+    ],
+    "difficulty": "Intermediate"
   }
 ]
