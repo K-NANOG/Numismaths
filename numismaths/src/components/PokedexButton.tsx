@@ -8,7 +8,6 @@ const PokedexButton: React.FC = () => {
         href="/numidex"
         style={{
           fontSize: '1.5rem',
-          fontWeight: 'bold',
           borderRadius: '12px',
         }}
       >

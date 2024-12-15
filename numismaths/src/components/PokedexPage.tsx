@@ -7,31 +7,30 @@ const PokedexPage: React.FC = () => {
 
   return (
     <div className="container py-5">
+      <h1 className="text-center text-primary mb-4">Numidex</h1> {/* Original header */}
       <div className="row justify-content-center">
         {pokedexItems.map((item) => (
           <div key={item} className="col-4 col-sm-3 col-md-2 mb-4">
             <button
-              className="btn btn-light p-4 w-100 d-flex flex-column align-items-center justify-content-center shadow-sm"
+              className="btn inset-shadow p-4 w-100 d-flex flex-column align-items-center justify-content-center"
               style={{
-                borderRadius: '10px',
-                boxShadow: '5px 5px 10px #b8b9be, -5px -5px 10px #FFFFFF',
-                border: 'none',
-                fontWeight: 'bold',
-                fontSize: '1.2rem',
+                borderRadius: '10px', // Enforce square shape
+                aspectRatio: '1 / 1', // Make it square
+                position: 'relative',
               }}
             >
               <span
+                className="text-primary"
                 style={{
                   position: 'absolute',
-                  fontSize: '4rem',
-                  color: '#e0e0e0',
+                  fontSize: '2rem', // Smaller number font size
                   zIndex: 0,
-                  fontWeight: '700',
+                  fontWeight: '500',
+                  opacity: 0.5,
                 }}
               >
                 {item}
               </span>
-              <span style={{ position: 'relative', zIndex: 1 }}>Item {item}</span>
             </button>
           </div>
         ))}
