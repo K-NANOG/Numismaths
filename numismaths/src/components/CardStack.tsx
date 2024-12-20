@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Spacer from './Spacer';
 import '../index.css';
 
 type Concept = {
@@ -114,7 +115,9 @@ const cardsStack: React.FC = () => {
             {concept.image && <img src={concept.image} alt={concept.name} />}
             <h2>{concept.name}</h2>
             <p>{concept.description}</p>
+            <Spacer size="sm" direction="vertical" />
             <span className="badge badge-info">{concept.category}</span>
+            <Spacer size="sm" direction="vertical" />
             <span className="badge badge-warning">{concept.difficulty}</span>
           </div>
         ))

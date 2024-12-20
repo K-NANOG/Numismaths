@@ -4,6 +4,7 @@ import AboutSection from '../components/AboutSection';
 import FeaturesSection from '../components/FeaturesSection';
 import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
+{/*import ProfileButton from '../components/ProfileButton';*/}
 
 const LandingPage: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const LandingPage: React.FC = () => {
         <AboutSection />
         <FeaturesSection />
         <CallToAction />
+       {/* <ProfileButton /> */}
       </main>
       <Footer />
     </div>

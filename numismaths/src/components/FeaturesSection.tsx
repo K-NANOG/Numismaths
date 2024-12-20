@@ -5,7 +5,7 @@ const FeaturesSection: React.FC = () => {
     {
       title: 'Glossary of Tools',
       description: 'Explore a curated list of mathematical and logical tools designed for accessibility and discovery.',
-      colorClass: 'text-primary',
+      colorClass: 'text-danger',
     },
     {
       title: 'Interactive Learning',
