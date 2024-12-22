@@ -40,5 +40,103 @@
       }
     ],
     "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_004",
+    "name": "Pigeonhole Principle",
+    "category": "Combinatorics",
+    "description": "The principle stating that if n items are placed in m containers, where n > m, at least one container must hold more than one item.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/Pigeonhole_1000.gif",
+        "description": "Visual representation of the pigeonhole principle."
+      }
+    ],
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_005",
+    "name": "Monte Carlo Method",
+    "category": "Probability and Statistics",
+    "description": "A computational algorithm that uses random sampling to obtain numerical results and solve problems that might be deterministic in principle.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/MonteCarloSimulation_1000.gif",
+        "description": "Monte Carlo simulation example."
+      }
+    ],
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "concept_006",
+    "name": "No-Free-Lunch Theorem",
+    "category": "Optimization and Machine Learning",
+    "description": "A theorem stating that no optimization algorithm performs better than others when performance is averaged across all possible problems.",
+    "visuals": [
+      {
+        "type": "diagram",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/NoFreeLunchTheorem_1000.gif",
+        "description": "Visualization of the No-Free-Lunch theorem."
+      }
+    ],
+    "difficulty": "Advanced"
+  },
+  {
+    "id": "concept_007",
+    "name": "Four Color Theorem",
+    "category": "Graph Theory",
+    "description": "The theorem stating that any map can be colored using no more than four colors such that no two adjacent regions share the same color.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/FourColorTheorem_1000.gif",
+        "description": "Illustration of the Four Color Theorem."
+      }
+    ],
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "concept_008",
+    "name": "Bayesian Inference",
+    "category": "Probability and Statistics",
+    "description": "A method of statistical inference that updates the probability for a hypothesis as more evidence or information becomes available.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/BayesianInference_1000.gif",
+        "description": "Graphical model of Bayesian inference."
+      }
+    ],
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "concept_009",
+    "name": "Markov Chains",
+    "category": "Probability and Statistics",
+    "description": "A stochastic process that undergoes transitions from one state to another based on certain probabilistic rules.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/MarkovChain_1000.gif",
+        "description": "Visualization of a Markov chain."
+      }
+    ],
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "concept_010",
+    "name": "Euler's Identity",
+    "category": "Complex Analysis",
+    "description": "The mathematical formula e^(iπ) + 1 = 0, which is considered one of the most beautiful equations in mathematics.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/EulersIdentity_1000.gif",
+        "description": "Graphical representation of Euler's Identity."
+      }
+    ],
+    "difficulty": "Beginner"
   }
 ]
