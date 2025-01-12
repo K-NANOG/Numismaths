@@ -11,8 +11,12 @@ const dist = path.join(process.cwd(), "../client/dist");
 
 app.use("/assets", express.static(path.join(dist, "/assets")));
 
+app.get("/concepts", (_: express.Request, res: express.Response) => {
+  res.sendFile(path.join(process.cwd(), "/src/concepts.json"));
+});
+
 app.use("/", (_: express.Request, res: express.Response) => {
-  res.sendFile(path.join(dist, "/index.html"))
+  res.sendFile(path.join(dist, "/index.html"));
 });
 
 app.listen(process.env.port || 8080);

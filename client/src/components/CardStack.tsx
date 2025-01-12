@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Spacer from './Spacer';
-import '../index.css';
+import React, { useEffect, useState } from "react";
+import Spacer from "./Spacer";
+import "../index.css";
 
 type Concept = {
   id: string; // Added an id property to uniquely identify each cards
@@ -17,29 +17,34 @@ const cardsStack: React.FC = () => {
   useEffect(() => {
     const loadcardss = async () => {
       try {
-        const response = await fetch('/concepts.json');
-        if (!response.ok) throw new Error('Failed to fetch concepts.json');
+        const response = await fetch("/concepts");
+        if (!response.ok) throw new Error("Failed to fetch concepts");
         const data = await response.json();
         setConcepts(data);
       } catch (error) {
-        console.error('Error loading JSON data:', error);
+        console.error("Error loading JSON data:", error);
       }
     };
 
     loadcardss();
   }, []);
 
-  const handleSwipe = (id: string, direction: 'left' | 'right') => {
-    const cardsToSwipe = document.querySelector<HTMLDivElement>(`.cards[data-id="${id}"]`);
+  const handleSwipe = (id: string, direction: "left" | "right") => {
+    const cardsToSwipe = document.querySelector<HTMLDivElement>(
+      `.cards[data-id="${id}"]`,
+    );
 
     if (cardsToSwipe) {
-      cardsToSwipe.style.transition = 'transform 0.5s, opacity 0.5s';
-      cardsToSwipe.style.transform = direction === 'left' ? 'translateX(-200%)' : 'translateX(200%)';
-      cardsToSwipe.style.opacity = '0';
+      cardsToSwipe.style.transition = "transform 0.5s, opacity 0.5s";
+      cardsToSwipe.style.transform =
+        direction === "left" ? "translateX(-200%)" : "translateX(200%)";
+      cardsToSwipe.style.opacity = "0";
     }
 
     setTimeout(() => {
-      setConcepts((prevConcepts) => prevConcepts.filter((concept) => concept.id !== id));
+      setConcepts((prevConcepts) =>
+        prevConcepts.filter((concept) => concept.id !== id),
+      );
     }, 500); // Match this delay with the CSS transition duration
   };
 
@@ -52,7 +57,7 @@ const cardsStack: React.FC = () => {
     const onMouseDown = (e: MouseEvent) => {
       isDragging = true;
       startX = e.clientX;
-      cardsElement.style.transition = 'none';
+      cardsElement.style.transition = "none";
     };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -61,9 +66,9 @@ const cardsStack: React.FC = () => {
       shiftX = currentX - startX;
       cardsElement.style.transform = `translateX(${shiftX}px) rotate(${shiftX / 20}deg)`;
 
-      if (shiftX > 50) cardsElement.classList.add('like');
-      else if (shiftX < -50) cardsElement.classList.add('dislike');
-      else cardsElement.classList.remove('like', 'dislike');
+      if (shiftX > 50) cardsElement.classList.add("like");
+      else if (shiftX < -50) cardsElement.classList.add("dislike");
+      else cardsElement.classList.remove("like", "dislike");
     };
 
     const onMouseUp = () => {
@@ -71,31 +76,31 @@ const cardsStack: React.FC = () => {
       isDragging = false;
 
       if (shiftX > 100) {
-        handleSwipe(id, 'right');
+        handleSwipe(id, "right");
       } else if (shiftX < -100) {
-        handleSwipe(id, 'left');
+        handleSwipe(id, "left");
       } else {
-        cardsElement.style.transition = 'transform 0.5s';
-        cardsElement.style.transform = '';
-        cardsElement.classList.remove('like', 'dislike');
+        cardsElement.style.transition = "transform 0.5s";
+        cardsElement.style.transform = "";
+        cardsElement.classList.remove("like", "dislike");
       }
     };
 
-    cardsElement.addEventListener('mousedown', onMouseDown);
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    cardsElement.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
 
     return () => {
-      cardsElement.removeEventListener('mousedown', onMouseDown);
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+      cardsElement.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
     };
   };
 
   useEffect(() => {
-    const cardsElements = document.querySelectorAll<HTMLDivElement>('.cards');
+    const cardsElements = document.querySelectorAll<HTMLDivElement>(".cards");
     cardsElements.forEach((cards) => {
-      const id = cards.getAttribute('data-id');
+      const id = cards.getAttribute("data-id");
       if (id) setupSwipeHandlers(cards, id);
     });
   }, [concepts]);
