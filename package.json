@@ -1,0 +1,15 @@
+{
+  "name": "numismaths",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "client": "cd client && npm run build",
+    "server": "cd server && npm run dev",
+    "start": "npm-run-all --parallel client server"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
