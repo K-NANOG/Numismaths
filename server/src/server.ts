@@ -7,12 +7,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// serve static files from the React app
-app.use("/", express.static(path.join(process.cwd(), "/client/dist")));
+const dist = path.join(process.cwd(), "../client/dist");
 
-// serve the React app for any route !== /api
-app.get("*", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "/client/dist/index.html"));
+app.use("/assets", express.static(path.join(dist, "/assets")));
+
+app.use("/", (_: express.Request, res: express.Response) => {
+  res.sendFile(path.join(dist, "/index.html"))
 });
 
 app.listen(process.env.port || 8080);

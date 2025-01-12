@@ -6,7 +6,10 @@
     "dev": "npx tsx src/server.ts"
   },
   "dependencies": {
-  },
-  "devDependencies": {
+    "express": "^4.21.2",
+    "npx": "^10.2.2",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
+    "tsx": "^4.19.2"
   }
 }
