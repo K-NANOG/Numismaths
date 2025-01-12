@@ -19,4 +19,7 @@ app.use("/", (_: express.Request, res: express.Response) => {
   res.sendFile(path.join(dist, "/index.html"));
 });
 
-app.listen(process.env.port || 8080);
+const PORT = 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+});
