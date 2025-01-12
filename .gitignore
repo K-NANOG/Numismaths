@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.replit
+client/src/data/*
+client/src/assets/*

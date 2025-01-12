@@ -1,0 +1,12 @@
+{
+  "name": "numismaths-server",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npx tsx src/server.ts"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

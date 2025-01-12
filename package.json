@@ -4,10 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "client": "cd client && npm run build",
+    "server": "cd server && npm run dev",
+    "start": "npm-run-all --parallel client server"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.1",
