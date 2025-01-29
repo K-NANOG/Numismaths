@@ -32319,3 +32319,8 @@ article a:hover {
   .cards.dislike {
     border: 4px solid var(--danger);
   }
+
+  .badge-beginner { background-color: transparent !important; color: var(--green) !important; box-shadow: inset 2px 2px 5px #b8b9be,inset -3px -3px 7px #fff; }
+  .badge-intermediate { background-color: transparent !important; color: var(--yellow) !important; box-shadow: inset 2px 2px 5px #b8b9be,inset -3px -3px 7px #fff;}
+  .badge-advanced { background-color: transparent !important; color: var(--red) !important; box-shadow: inset 2px 2px 5px #b8b9be,inset -3px -3px 7px #fff;}
+  

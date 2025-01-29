@@ -131,7 +131,7 @@ const cardsStack: React.FC = () => {
             <Spacer size="sm" direction="vertical" />
             <span className="badge badge-info">{concept.category}</span>
             <Spacer size="sm" direction="vertical" />
-            <span className="badge badge-warning">{concept.difficulty}</span>
+            <span className={`badge badge-${concept.difficulty.toLowerCase()}`}>{concept.difficulty}</span>
           </div>
         ))
       )}
