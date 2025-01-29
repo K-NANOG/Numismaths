@@ -23,7 +23,7 @@ const FeaturesSection: React.FC = () => {
     <section className="row text-center py-5">
       {features.map((feature, index) => (
         <div key={index} className="col-md-4">
-          <div className="card p-4 shadow">
+          <div className="card p-4 shadow"> {/*I'm hesitating with className="inset-shadow"*/}
             <h3 className={feature.colorClass}>{feature.title}</h3>
             <p>{feature.description}</p>
           </div>
