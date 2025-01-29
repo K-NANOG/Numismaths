@@ -29,24 +29,32 @@ const cardsStack: React.FC = () => {
     loadcardss();
   }, []);
 
-  const handleSwipe = (id: string, direction: "left" | "right") => {
-    const cardsToSwipe = document.querySelector<HTMLDivElement>(
-      `.cards[data-id="${id}"]`,
-    );
-
-    if (cardsToSwipe) {
-      cardsToSwipe.style.transition = "transform 0.5s, opacity 0.5s";
-      cardsToSwipe.style.transform =
-        direction === "left" ? "translateX(-200%)" : "translateX(200%)";
-      cardsToSwipe.style.opacity = "0";
+  const handleSwipe = async (id: string, direction: "left" | "right") => {
+    const cardElement = document.querySelector<HTMLDivElement>(`.cards[data-id="${id}"]`);
+  
+    if (cardElement) {
+      cardElement.style.transition = "transform 0.5s, opacity 0.5s";
+      cardElement.style.transform = direction === "left" ? "translateX(-200%)" : "translateX(200%)";
+      cardElement.style.opacity = "0";
     }
-
+  
+    if (direction === "right") {
+      try {
+        await fetch("/save-liked", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id }),
+        });
+      } catch (error) {
+        console.error("Error saving liked concept:", error);
+      }
+    }
+  
     setTimeout(() => {
-      setConcepts((prevConcepts) =>
-        prevConcepts.filter((concept) => concept.id !== id),
-      );
-    }, 500); // Match this delay with the CSS transition duration
+      setConcepts((prev) => prev.filter((concept) => concept.id !== id));
+    }, 500); // Match CSS transition delay
   };
+  
 
   const setupSwipeHandlers = (cardsElement: HTMLDivElement, id: string) => {
     let startX = 0;
