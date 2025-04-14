@@ -1,75 +1,114 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Spacer from "./Spacer";
-import "../index.css";
+import "../styles.css";
 
-type Concept = {
-  id: string; // Added an id property to uniquely identify each cards
+interface Concept {
+  id: string;
   name: string;
   description: string;
   category: string;
   difficulty: string;
-  image?: string;
+}
+
+type SwipeAction = {
+  id: string;
+  direction: "left" | "right";
+  timestamp: number;
 };
 
-const cardsStack: React.FC = () => {
+const CardStack: React.FC = () => {
   const [concepts, setConcepts] = useState<Concept[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [savingLike, setSavingLike] = useState(false);
 
-  useEffect(() => {
-    const loadcardss = async () => {
-      try {
-        const response = await fetch("/concepts");
-        if (!response.ok) throw new Error("Failed to fetch concepts");
-        const data = await response.json();
-        setConcepts(data);
-      } catch (error) {
-        console.error("Error loading JSON data:", error);
-      }
-    };
-
-    loadcardss();
+  const loadConcepts = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await fetch("http://localhost:8080/api/concepts");
+      if (!response.ok) throw new Error("Failed to fetch concepts");
+      const data = await response.json();
+      setConcepts(data);
+    } catch (error) {
+      console.error("Error loading concepts:", error);
+      setError("Failed to load concepts. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  const handleSwipe = async (id: string, direction: "left" | "right") => {
+  useEffect(() => {
+    loadConcepts();
+  }, [loadConcepts]);
+
+  const handleSwipe = useCallback(async (id: string, direction: "left" | "right") => {
+    if (isAnimating || savingLike) return;
+    setIsAnimating(true);
+
     const cardElement = document.querySelector<HTMLDivElement>(`.cards[data-id="${id}"]`);
-  
-    if (cardElement) {
+    const currentConcept = concepts.find(c => c.id === id);
+    
+    if (!currentConcept || !cardElement) {
+      setIsAnimating(false);
+      return;
+    }
+
+    try {
+      // Start animation
       cardElement.style.transition = "transform 0.5s, opacity 0.5s";
       cardElement.style.transform = direction === "left" ? "translateX(-200%)" : "translateX(200%)";
       cardElement.style.opacity = "0";
-    }
-  
-    if (direction === "right") {
-      try {
-        await fetch("/save-liked", {
+
+      // If swiped right, save to liked concepts
+      if (direction === "right") {
+        setSavingLike(true);
+        const response = await fetch("http://localhost:8080/api/save-liked", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ id }),
         });
-      } catch (error) {
-        console.error("Error saving liked concept:", error);
-      }
-    }
-  
-    setTimeout(() => {
-      setConcepts((prev) => prev.filter((concept) => concept.id !== id));
-    }, 500); // Match CSS transition delay
-  };
-  
 
-  const setupSwipeHandlers = (cardsElement: HTMLDivElement, id: string) => {
+        if (!response.ok) {
+          throw new Error(`Failed to save liked concept: ${response.statusText}`);
+        }
+      }
+
+      // Wait for animation to complete
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Update state
+      setConcepts(prev => prev.filter(concept => concept.id !== id));
+    } catch (error) {
+      console.error("Error during swipe:", error);
+      // Reset card position on error
+      cardElement.style.transition = "transform 0.3s, opacity 0.3s";
+      cardElement.style.transform = "";
+      cardElement.style.opacity = "1";
+      setError("Failed to process swipe action. Please try again.");
+    } finally {
+      setIsAnimating(false);
+      setSavingLike(false);
+    }
+  }, [concepts, isAnimating, savingLike]);
+
+  const setupSwipeHandlers = useCallback((cardsElement: HTMLDivElement, id: string) => {
     let startX = 0;
     let currentX = 0;
     let shiftX = 0;
     let isDragging = false;
 
     const onMouseDown = (e: MouseEvent) => {
+      if (isAnimating || savingLike) return;
       isDragging = true;
       startX = e.clientX;
       cardsElement.style.transition = "none";
+      setError(null); // Clear any previous errors on new interaction
     };
 
     const onMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
+      if (!isDragging || isAnimating || savingLike) return;
       currentX = e.clientX;
       shiftX = currentX - startX;
       cardsElement.style.transform = `translateX(${shiftX}px) rotate(${shiftX / 20}deg)`;
@@ -80,15 +119,13 @@ const cardsStack: React.FC = () => {
     };
 
     const onMouseUp = () => {
-      if (!isDragging) return;
+      if (!isDragging || isAnimating || savingLike) return;
       isDragging = false;
 
-      if (shiftX > 100) {
-        handleSwipe(id, "right");
-      } else if (shiftX < -100) {
-        handleSwipe(id, "left");
+      if (Math.abs(shiftX) > 100) {
+        handleSwipe(id, shiftX > 0 ? "right" : "left");
       } else {
-        cardsElement.style.transition = "transform 0.5s";
+        cardsElement.style.transition = "transform 0.3s";
         cardsElement.style.transform = "";
         cardsElement.classList.remove("like", "dislike");
       }
@@ -103,35 +140,75 @@ const cardsStack: React.FC = () => {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
     };
-  };
+  }, [handleSwipe, isAnimating, savingLike]);
 
   useEffect(() => {
     const cardsElements = document.querySelectorAll<HTMLDivElement>(".cards");
+    const cleanupFns: (() => void)[] = [];
+
     cardsElements.forEach((cards) => {
       const id = cards.getAttribute("data-id");
-      if (id) setupSwipeHandlers(cards, id);
+      if (id) {
+        const cleanup = setupSwipeHandlers(cards, id);
+        cleanupFns.push(cleanup);
+      }
     });
-  }, [concepts]);
+
+    return () => {
+      cleanupFns.forEach(cleanup => cleanup());
+    };
+  }, [concepts, setupSwipeHandlers]);
+
+  if (loading) {
+    return (
+      <div className="cards-container">
+        <div className="text-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading concepts...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="cards-container">
+        <div className="text-center">
+          <p className="text-danger mb-3">{error}</p>
+          <button className="btn btn-primary" onClick={() => loadConcepts()}>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div id="cards-container" className="cards-container">
       {concepts.length === 0 ? (
-        <p>No more cards...</p>
+        <div className="text-center">
+          <p>No more concepts to explore!</p>
+          <button className="btn btn-primary mt-3" onClick={() => loadConcepts()}>
+            Start Over
+          </button>
+        </div>
       ) : (
         concepts.map((concept, index) => (
           <div
-            key={concept.id} // Use the unique id for the key
-            data-id={concept.id} // Add a data-id attribute for DOM access
+            key={concept.id}
+            data-id={concept.id}
             className="cards"
             style={{ zIndex: concepts.length - index }}
           >
-            {concept.image && <img src={concept.image} alt={concept.name} />}
             <h2>{concept.name}</h2>
             <p>{concept.description}</p>
             <Spacer size="sm" direction="vertical" />
             <span className="badge badge-info">{concept.category}</span>
             <Spacer size="sm" direction="vertical" />
-            <span className={`badge badge-${concept.difficulty.toLowerCase()}`}>{concept.difficulty}</span>
+            <span className={`badge badge-${concept.difficulty.toLowerCase()}`}>
+              {concept.difficulty}
+            </span>
           </div>
         ))
       )}
@@ -139,4 +216,4 @@ const cardsStack: React.FC = () => {
   );
 };
 
-export default cardsStack;
+export default CardStack;

@@ -10,6 +10,13 @@
     "npx": "^10.2.2",
     "path": "^0.12.7",
     "process": "^0.11.10",
-    "tsx": "^4.19.2"
+    "tsx": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.11.28",
+    "typescript": "^5.4.2"
   }
 }

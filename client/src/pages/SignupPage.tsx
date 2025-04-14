@@ -1,5 +1,5 @@
 import React from "react";
-import "../index.css"; // Import your custom CSS styles here
+import "../styles.css";
 
 const SignupPage: React.FC = () => {
   return (

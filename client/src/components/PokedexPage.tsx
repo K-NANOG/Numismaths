@@ -1,37 +1,100 @@
-import React from 'react';
-import '../index.css';
+import React, { useEffect, useState, useCallback } from 'react';
+import '../styles.css';
+
+interface Concept {
+  id: string;
+  name: string;
+  difficulty: string;
+}
 
 const PokedexPage: React.FC = () => {
-  // Array of 100 placeholders for the buttons/icons
-  const pokedexItems = Array.from({ length: 100 }, (_, index) => index + 1);
+  const [likedConcepts, setLikedConcepts] = useState<Concept[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [lastUpdate, setLastUpdate] = useState<number>(Date.now());
+
+  const fetchLikedConcepts = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await fetch('http://localhost:8080/api/liked-concepts');
+      if (!response.ok) throw new Error('Failed to fetch liked concepts');
+      const data = await response.json();
+      setLikedConcepts(data);
+    } catch (err) {
+      console.error('Error fetching liked concepts:', err);
+      setError('Failed to load liked concepts. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchLikedConcepts();
+  }, [fetchLikedConcepts, lastUpdate]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setLastUpdate(Date.now());
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="container mt-4">
+        <div className="text-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading liked concepts...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mt-4">
+        <div className="text-center">
+          <p className="text-danger mb-3">{error}</p>
+          <button className="btn btn-primary" onClick={() => setLastUpdate(Date.now())}>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Calculate total slots (100 for now, like a Pokédex)
+  const totalSlots = 100;
+  const numidexSlots = Array.from({ length: totalSlots }, (_, index) => {
+    const concept = likedConcepts[index];
+    return {
+      number: (index + 1).toString().padStart(3, '0'),
+      concept
+    };
+  });
 
   return (
-    <div className="container py-5">
-      <h1 className="text-center text-primary mb-4">Numidex</h1> {/* Original header */}
-      <div className="row justify-content-center">
-        {pokedexItems.map((item) => (
-          <div key={item} className="col-4 col-sm-3 col-md-2 mb-4">
-            <button
-              className="btn inset-shadow p-4 w-100 d-flex flex-column align-items-center justify-content-center"
-              style={{
-                borderRadius: '10px', // Enforce square shape
-                aspectRatio: '1 / 1', // Make it square
-                position: 'relative',
-              }}
-            >
-              <span
-                className="text-primary"
-                style={{
-                  position: 'absolute',
-                  fontSize: '2rem', // Smaller number font size
-                  zIndex: 0,
-                  fontWeight: '500',
-                  opacity: 0.5,
-                }}
-              >
-                {item}
-              </span>
-            </button>
+    <div className="numidex-container">
+      <h1 className="text-center mb-4">Your Numidex</h1>
+      <div className="numidex-grid">
+        {numidexSlots.map(({ number, concept }) => (
+          <div key={number} className="numidex-slot">
+            {concept ? (
+              <div className={`concept-card ${concept.difficulty.toLowerCase()}`}>
+                <span className="concept-number">{number}</span>
+                <h3 className="concept-name">{concept.name}</h3>
+                <span className={`difficulty-badge ${concept.difficulty.toLowerCase()}`}>
+                  {concept.difficulty}
+                </span>
+              </div>
+            ) : (
+              <div className="concept-card empty">
+                <span className="concept-number">{number}</span>
+              </div>
+            )}
           </div>
         ))}
       </div>
