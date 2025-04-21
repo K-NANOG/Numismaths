@@ -1,26 +1,24 @@
-# Kill any running Node.js processes
-Write-Host "Stopping all Node.js processes..." -ForegroundColor Yellow
+# Kill all Node.js processes
+Write-Host "Killing all Node.js processes..." -ForegroundColor Yellow
 taskkill /F /IM node.exe 2>$null
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "Node.js processes stopped successfully" -ForegroundColor Green
-} else {
-    Write-Host "No Node.js processes were running" -ForegroundColor Gray
-}
+Start-Sleep -Seconds 1
 
-# Kill any processes using ports 5173, 5174, and 8080
-Write-Host "`nFreeing up ports..." -ForegroundColor Yellow
-$ports = @(5173, 5174, 8080)
-foreach ($port in $ports) {
-    $processId = (Get-NetTCPConnection -LocalPort $port -ErrorAction SilentlyContinue).OwningProcess
-    if ($processId) {
-        Stop-Process -Id $processId -Force
-        Write-Host "Freed port $port" -ForegroundColor Green
-    }
-}
+# Clean client
+Write-Host "`nCleaning client..." -ForegroundColor Yellow
+Set-Location -Path "client"
+npm cache clean --force
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
+npm install
+Set-Location -Path ".."
 
-# Small delay to ensure all processes are properly terminated
-Start-Sleep -Seconds 2
+# Clean server
+Write-Host "`nCleaning server..." -ForegroundColor Yellow
+Set-Location -Path "server"
+npm cache clean --force
+Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
+npm install
+Set-Location -Path ".."
 
 # Start the application
-Write-Host "`nStarting the application..." -ForegroundColor Yellow
+Write-Host "`nStarting the application..." -ForegroundColor Green
 npm start 

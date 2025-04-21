@@ -1,0 +1,12 @@
+{
+  "root": {
+    "id": "root",
+    "name": "All Collections",
+    "children": [],
+    "conceptIds": [],
+    "level": 0,
+    "path": [
+      "root"
+    ]
+  }
+}

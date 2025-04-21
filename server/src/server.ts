@@ -3,6 +3,7 @@ import path from "path";
 import process from "process";
 import cors from 'cors';
 import { conceptService } from './services/ConceptService';
+import { Concept } from './services/ConceptService';
 
 const app = express();
 
@@ -31,13 +32,25 @@ app.get("/api/concepts", async (req, res) => {
 
 app.post("/api/save-liked", async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id, concept } = req.body;
     if (!id) {
       return res.status(400).json({ error: "Concept ID is required" });
     }
     
-    await conceptService.saveLikedConcept(id);
-    res.json({ success: true });
+    // If it's a new concept from Wikipedia, it will have the full concept object
+    if (concept) {
+      // Generate a new ID for the concept if it's from Wikipedia
+      const newId = await conceptService.getNextConceptId();
+      const newConcept: Concept = {
+        ...concept,
+        id: newId
+      };
+      await conceptService.saveLikedConcept(newId, newConcept);
+      res.json({ success: true, newId });
+    } else {
+      await conceptService.saveLikedConcept(id);
+      res.json({ success: true });
+    }
   } catch (error) {
     console.error("Error saving liked concept:", error);
     res.status(500).json({ error: "Failed to save liked concept" });

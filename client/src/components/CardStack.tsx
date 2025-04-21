@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Spacer from "./Spacer";
+import WikipediaSearch from "./WikipediaSearch";
 import "../styles.css";
 
 interface Concept {
@@ -8,6 +9,13 @@ interface Concept {
   description: string;
   category: string;
   difficulty: string;
+  pageUrl?: string;
+  fullArticle?: string;
+  visuals?: Array<{
+    type: string;
+    url: string;
+    description: string;
+  }>;
 }
 
 type SwipeAction = {
@@ -43,6 +51,15 @@ const CardStack: React.FC = () => {
     loadConcepts();
   }, [loadConcepts]);
 
+  const handleNewCards = (newCards: Concept[]) => {
+    // Add temporary IDs to new cards from Wikipedia
+    const cardsWithTempIds = newCards.map((card, index) => ({
+      ...card,
+      id: `temp_${Date.now()}_${index}`
+    }));
+    setConcepts(prev => [...prev, ...cardsWithTempIds]);
+  };
+
   const handleSwipe = useCallback(async (id: string, direction: "left" | "right") => {
     if (isAnimating || savingLike) return;
     setIsAnimating(true);
@@ -67,11 +84,21 @@ const CardStack: React.FC = () => {
         const response = await fetch("http://localhost:8080/api/save-liked", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id }),
+          body: JSON.stringify({
+            id,
+            // If the concept ID starts with 'temp_', it's from Wikipedia
+            concept: id.startsWith('temp_') ? currentConcept : undefined
+          }),
         });
 
         if (!response.ok) {
           throw new Error(`Failed to save liked concept: ${response.statusText}`);
+        }
+
+        // If it was a Wikipedia concept, update its ID with the new one from the server
+        const data = await response.json();
+        if (data.newId) {
+          currentConcept.id = data.newId;
         }
       }
 
@@ -189,28 +216,37 @@ const CardStack: React.FC = () => {
       {concepts.length === 0 ? (
         <div className="text-center">
           <p>No more concepts to explore!</p>
+          <WikipediaSearch onNewCards={handleNewCards} />
           <button className="btn btn-primary mt-3" onClick={() => loadConcepts()}>
             Start Over
           </button>
         </div>
       ) : (
-        concepts.map((concept, index) => (
-          <div
-            key={concept.id}
-            data-id={concept.id}
-            className="cards"
-            style={{ zIndex: concepts.length - index }}
-          >
-            <h2>{concept.name}</h2>
-            <p>{concept.description}</p>
-            <Spacer size="sm" direction="vertical" />
-            <span className="badge badge-info">{concept.category}</span>
-            <Spacer size="sm" direction="vertical" />
-            <span className={`badge badge-${concept.difficulty.toLowerCase()}`}>
-              {concept.difficulty}
-            </span>
-          </div>
-        ))
+        <>
+          {concepts.map((concept, index) => (
+            <div
+              key={concept.id}
+              data-id={concept.id}
+              className="cards"
+              style={{ zIndex: concepts.length - index }}
+            >
+              <div className="cards-content">
+                <h2>{concept.name}</h2>
+                <p>{concept.description}</p>
+              </div>
+              <div className="cards-tags">
+                <span className="badge badge-info">
+                  {concept.category}
+                </span>
+                <Spacer size="sm" direction="vertical" />
+                <span className={`badge badge-${concept.difficulty.toLowerCase()}`}>
+                  {concept.difficulty}
+                </span>
+              </div>
+            </div>
+          ))}
+          <WikipediaSearch onNewCards={handleNewCards} />
+        </>
       )}
     </div>
   );

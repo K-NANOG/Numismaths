@@ -138,5 +138,88 @@
       }
     ],
     "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_011",
+    "name": "Artificial life",
+    "category": "Alife",
+    "description": "Artificial life (ALife or A-Life) is a field of study wherein researchers examine systems related to natural life, its processes, and its evolution, through the use of simulations with computer models, robotics, and biochemistry. The discipline was named by Christopher Langton, an American computer scientist, in 1986. In 1987, Langton organized the first conference on the field, in Los Alamos, New Mexico. There are three main kinds of alife, named for their approaches: soft, from software; hard, from hardware; and wet, from biochemistry. Artificial life researchers study traditional biology by trying to recreate aspects of biological phenomena.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Unevolved_swimbots_showing_genetic_diversity.png/330px-Unevolved_swimbots_showing_genetic_diversity.png",
+        "description": "Image related to Artificial life"
+      }
+    ],
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_012",
+    "name": "Synthetic biology",
+    "category": "synthetic biology",
+    "description": "Synthetic biology (SynBio) is a multidisciplinary field of science that focuses on living systems and organisms, and it applies engineering principles to develop new biological parts, devices, and systems or to redesign existing systems found in nature.\nIt is a branch of science that encompasses a broad range of methodologies from...",
+    "fullArticle": "Synthetic biology (SynBio) is a multidisciplinary field of science that focuses on living systems and organisms, and it applies engineering principles to develop new biological parts, devices, and systems or to redesign existing systems found in nature.\nIt is a branch of science that encompasses a broad range of methodologies from various disciplines, such as biochemistry, biotechnology, biomaterials, material science/engineering, genetic engineering, molecular biology, molecular engineering, systems biology, membrane science, biophysics, chemical and biological engineering, electrical and computer engineering, control engineering and evolutionary biology.\nIt includes designing and constructing biological modules, biological systems, and biological machines, or re-designing existing biological systems for useful purposes.\nAdditionally, it is the branch of science that focuses on the new abilities of engineering into existing organisms to redesign them for useful purposes.\nIn order to produce predictable and robust systems with novel functionalities that do not already exist in nature, it is also necessary to apply the engineering paradigm of systems design to biological systems. According to the European Commission, this possibly involves a molecular assembler based on biomolecular systems such as the ribosome.",
+    "visuals": [],
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_013",
+    "name": "Geomelting",
+    "category": "geomelting",
+    "description": "GeoMelt is a process by which dangerous, contaminated material (such as radioactive waste and heavy metals) is mixed with clean soil, a blend of industrial minerals, and/or glass frit and melted to create an extremely hard and leach-resistant glass product.  Vitrification immobilizes nearly all of the inorganic contaminants (i.e.,...",
+    "fullArticle": "GeoMelt is a process by which dangerous, contaminated material (such as radioactive waste and heavy metals) is mixed with clean soil, a blend of industrial minerals, and/or glass frit and melted to create an extremely hard and leach-resistant glass product.  Vitrification immobilizes nearly all of the inorganic contaminants (i.e., radionuclides and heavy metals) present in the initial mixture by incorporation into the glass matrix. Organic wastes in the melt are destroyed by pyrolysis, and gaseous contaminants released during the melting process are treated separately.\nDeveloped in 1980 by the U.S. Department of Energy's Pacific Northwest National Laboratory (PNNL), the GeoMelt process is deployed in one of two ways: in-situ (in-place) treatment of buried radioactive and hazardous wastes, and In-Container Vitrification (ICV), which is ex-situ treatment where radioactive and hazardous wastes are vitrified in a refractory-lined steel container.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Geomelting",
+    "visuals": [],
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_014",
+    "name": "Transdifferentiation",
+    "category": "transdifferentiation",
+    "description": "Transdifferentiation, also known as lineage reprogramming, is the process in which one mature somatic cell is transformed into another mature somatic cell without undergoing an intermediate pluripotent state or progenitor cell type. It is a type of metaplasia, which includes all cell fate switches, including the interconversion of stem cells....",
+    "fullArticle": "Transdifferentiation, also known as lineage reprogramming, is the process in which one mature somatic cell is transformed into another mature somatic cell without undergoing an intermediate pluripotent state or progenitor cell type. It is a type of metaplasia, which includes all cell fate switches, including the interconversion of stem cells. Current uses of transdifferentiation include disease modeling and drug discovery and in the future may include gene therapy and regenerative medicine. The term 'transdifferentiation' was originally coined by Selman and Kafatos in 1974 to describe a change in cell properties as cuticle-producing cells became salt-secreting cells in silk moths undergoing metamorphosis.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Transdifferentiation",
+    "visuals": [],
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_015",
+    "name": "Turritopsis dohrnii",
+    "category": "transdifferentiation",
+    "description": "Turritopsis dohrnii, also known as the immortal jellyfish, is a species of small, biologically immortal jellyfish found worldwide in temperate to tropic waters. It is one of the few known cases of animals capable of completely reverting to a sexually immature, colonial stage after having reached sexual maturity as a...",
+    "fullArticle": "Turritopsis dohrnii, also known as the immortal jellyfish, is a species of small, biologically immortal jellyfish found worldwide in temperate to tropic waters. It is one of the few known cases of animals capable of completely reverting to a sexually immature, colonial stage after having reached sexual maturity as a solitary individual.\nLike most other hydrozoans, T. dohrnii begin their lives as tiny, free-swimming larvae known as planulae. As a planula settles down, it gives rise to a colony of polyps that are attached to the sea floor. All the polyps and jellyfish arising from a single planula are genetically identical clones. The polyps form into an extensively branched form, which is not commonly seen in most jellyfish. Jellyfish, also known as medusae, then bud off these polyps and continue their life in a free-swimming form, eventually becoming sexually mature. When sexually mature, they are known to prey on other jellyfish species at a rapid pace. If the T. dohrnii jellyfish is exposed to environmental stress, physical assault, or is sick or old, it can revert to the polyp stage, forming a new polyp colony. It does this through the cell development process of transdifferentiation, which alters the differentiated state of the cells and transforms them into new types of cells.\nTheoretically, this process can go on indefinitely, effectively rendering the jellyfish biologically immortal, although in practice individuals can still die. In nature, most Turritopsis dohrnii are likely to succumb to predation or disease in the medusa stage without reverting to the polyp form.\nThe capability of biological immortality with no maximum lifespan makes T. dohrnii an important target of basic biological aging and pharmaceutical research.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Turritopsis_dohrnii",
+    "visuals": [],
+    "difficulty": "Intermediate"
+  },
+  {
+    "id": "concept_016",
+    "name": "Dedifferentiation",
+    "category": "transdifferentiation",
+    "description": "Dedifferentiation (pronounced dē-ˌdi-fə-ˌren-chē-ˈā-shən) is a transient process by which cells become less specialized and return to an earlier cell state within the same lineage. This suggests an increase in cell potency, meaning that, following dedifferentiation, a cell may possess the ability to re-differentiate into more cell types than it did...",
+    "fullArticle": "Dedifferentiation (pronounced dē-ˌdi-fə-ˌren-chē-ˈā-shən) is a transient process by which cells become less specialized and return to an earlier cell state within the same lineage. This suggests an increase in cell potency, meaning that, following dedifferentiation, a cell may possess the ability to re-differentiate into more cell types than it did before dedifferentiation. This is in contrast to differentiation, where differences in gene expression, morphology, or physiology arise in a cell, making its function increasingly specialized.\nThe loss of specialization observed in dedifferentiation can be noted through changes in gene expression, physiology, function within the organism, proliferative activity, or morphology. While it can be induced in a laboratory setting through processes like direct reprogramming and the production of induced pluripotent stem cells, endogenous dedifferentiation processes also exist as a component of wound healing mechanisms.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Dedifferentiation",
+    "visuals": [],
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_017",
+    "name": "Metaplasia",
+    "category": "transdifferentiation",
+    "description": "Metaplasia (from Greek 'change in form') is the transformation of a cell type to another cell type.  The change from one type of cell to another may be part of a normal maturation process, or caused by some sort of abnormal stimulus.  In simplistic terms, it is as...",
+    "fullArticle": "Metaplasia (from Greek 'change in form') is the transformation of a cell type to another cell type.  The change from one type of cell to another may be part of a normal maturation process, or caused by some sort of abnormal stimulus.  In simplistic terms, it is as if the original cells are not robust enough to withstand their environment, so they transform into another cell type better suited to their environment. If the stimulus causing metaplasia is removed or ceases, tissues return to their normal pattern of differentiation.  Metaplasia is not synonymous with dysplasia, and is not considered to be an actual cancer.  It is also contrasted with heteroplasia, which is the spontaneous abnormal growth of cytologic and histologic elements. Today, metaplastic changes are usually considered to be an early phase of carcinogenesis, specifically for those with a history of cancers or who are known to be susceptible to carcinogenic changes. Metaplastic change is thus often viewed as a premalignant condition that requires immediate intervention, either surgical or medical, lest it lead to cancer via malignant transformation.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Metaplasia",
+    "visuals": [],
+    "difficulty": "Beginner"
+  },
+  {
+    "id": "concept_018",
+    "name": "Biological immortality",
+    "category": "immortality",
+    "description": "Biological immortality (sometimes referred to as bio-indefinite mortality) is a state in which the rate of mortality from senescence (or aging) is stable or decreasing, thus decoupling it from chronological age. Various unicellular and multicellular species, including some vertebrates, achieve this state either throughout their existence or after living long...",
+    "fullArticle": "Biological immortality (sometimes referred to as bio-indefinite mortality) is a state in which the rate of mortality from senescence (or aging) is stable or decreasing, thus decoupling it from chronological age. Various unicellular and multicellular species, including some vertebrates, achieve this state either throughout their existence or after living long enough. A biologically immortal living being can still die from means other than senescence, such as through injury, poison, disease, predation, lack of available resources, or changes to environment.\nThis definition of immortality has been challenged in the Handbook of the Biology of Aging, because the increase in rate of mortality as a function of chronological age may be negligible at extremely old ages, an idea referred to as the late-life mortality plateau. The rate of mortality may cease to increase in old age, but in most cases that rate is typically very high.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Biological_immortality",
+    "visuals": [],
+    "difficulty": "Beginner"
   }
 ]
