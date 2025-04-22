@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { WikipediaResponse, WikipediaSearchResult, WikipediaPage, WikipediaImage, ConceptCard } from '../types/Wikipedia';
+import { Tag } from '../config/tags';
 
 const WIKIPEDIA_API_URL = 'https://en.wikipedia.org/w/api.php';
 
@@ -68,14 +69,21 @@ export class WikipediaService {
     }
   }
 
-  public async searchArticles(theme: string, limit: number = 5): Promise<ConceptCard[]> {
+  public async searchArticles(theme: string, tags: Tag[] = [], limit: number = 5): Promise<ConceptCard[]> {
     try {
+      // Build search query including tags
+      const tagQuery = tags.length > 0 
+        ? ` ${tags.map(tag => tag.name).join(' OR ')}` 
+        : '';
+      
+      const searchQuery = `${theme}${tagQuery}`;
+
       // Search for articles
       const searchResponse = await axios.get<WikipediaResponse<WikipediaSearchResult>>(WIKIPEDIA_API_URL, {
         params: {
           action: 'query',
           list: 'search',
-          srsearch: theme,
+          srsearch: searchQuery,
           srlimit: limit,
           format: 'json',
           origin: '*'
@@ -118,7 +126,8 @@ export class WikipediaService {
           fullArticle: page.extract,
           pageUrl: page.fullurl,
           visuals: [],
-          difficulty: this.determineDifficulty(page.extract)
+          difficulty: this.determineDifficulty(page.extract),
+          tags: tags.map(tag => tag.name)
         };
 
         conceptCards.push(conceptCard);

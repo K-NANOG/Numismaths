@@ -36,7 +36,11 @@ const WikipediaSearch: React.FC<WikipediaSearchProps> = ({ onNewCards }) => {
 
   return (
     <div className="wikipedia-search">
-      <div className="input-group mb-3">
+      <h3>Explore New Concepts</h3>
+      <p>
+        Search Wikipedia to discover more mathematical concepts and add them to your collection.
+      </p>
+      <div className="input-group">
         <input
           type="text"
           className="form-control"
@@ -51,9 +55,9 @@ const WikipediaSearch: React.FC<WikipediaSearchProps> = ({ onNewCards }) => {
           disabled={loading}
         >
           {loading ? (
-            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
           ) : (
-            'Search Wikipedia'
+            'Search'
           )}
         </button>
       </div>

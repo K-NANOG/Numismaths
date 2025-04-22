@@ -74,9 +74,33 @@ const CardStack: React.FC = () => {
 
     try {
       // Start animation
-      cardElement.style.transition = "transform 0.5s, opacity 0.5s";
-      cardElement.style.transform = direction === "left" ? "translateX(-200%)" : "translateX(200%)";
+      cardElement.style.transition = "transform 0.5s ease-out, opacity 0.5s ease-out";
+      cardElement.style.transform = direction === "left" 
+        ? "translateX(-200%) rotate(-30deg)" 
+        : "translateX(200%) rotate(30deg)";
       cardElement.style.opacity = "0";
+
+      // Animate remaining cards up
+      const remainingCards = document.querySelectorAll<HTMLDivElement>(`.cards:not([data-id="${id}"])`);
+      remainingCards.forEach((card, index) => {
+        card.style.transition = "all 0.4s ease-out";
+        if (index === 0) {
+          card.style.transform = "translateY(0) scale(1)";
+          card.style.opacity = "1";
+        } else if (index === 1) {
+          card.style.transform = "translateY(-10px) scale(0.95)";
+          card.style.opacity = "0.9";
+        } else if (index === 2) {
+          card.style.transform = "translateY(-20px) scale(0.9)";
+          card.style.opacity = "0.8";
+        } else if (index === 3) {
+          card.style.transform = "translateY(-30px) scale(0.85)";
+          card.style.opacity = "0.7";
+        } else {
+          card.style.transform = "translateY(-40px) scale(0.8)";
+          card.style.opacity = "0.6";
+        }
+      });
 
       // If swiped right, save to liked concepts
       if (direction === "right") {
@@ -86,7 +110,6 @@ const CardStack: React.FC = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             id,
-            // If the concept ID starts with 'temp_', it's from Wikipedia
             concept: id.startsWith('temp_') ? currentConcept : undefined
           }),
         });
@@ -95,7 +118,6 @@ const CardStack: React.FC = () => {
           throw new Error(`Failed to save liked concept: ${response.statusText}`);
         }
 
-        // If it was a Wikipedia concept, update its ID with the new one from the server
         const data = await response.json();
         if (data.newId) {
           currentConcept.id = data.newId;
@@ -110,8 +132,8 @@ const CardStack: React.FC = () => {
     } catch (error) {
       console.error("Error during swipe:", error);
       // Reset card position on error
-      cardElement.style.transition = "transform 0.3s, opacity 0.3s";
-      cardElement.style.transform = "";
+      cardElement.style.transition = "transform 0.3s ease-out, opacity 0.3s ease-out";
+      cardElement.style.transform = "translateY(0) scale(1)";
       cardElement.style.opacity = "1";
       setError("Failed to process swipe action. Please try again.");
     } finally {
@@ -131,14 +153,18 @@ const CardStack: React.FC = () => {
       isDragging = true;
       startX = e.clientX;
       cardsElement.style.transition = "none";
-      setError(null); // Clear any previous errors on new interaction
+      setError(null);
     };
 
     const onMouseMove = (e: MouseEvent) => {
       if (!isDragging || isAnimating || savingLike) return;
       currentX = e.clientX;
       shiftX = currentX - startX;
-      cardsElement.style.transform = `translateX(${shiftX}px) rotate(${shiftX / 20}deg)`;
+      const rotation = shiftX / 20;
+      const scale = Math.max(0.95, 1 - Math.abs(shiftX) / 1000);
+      
+      cardsElement.style.transform = `translateX(${shiftX}px) rotate(${rotation}deg) scale(${scale})`;
+      cardsElement.style.opacity = `${1 - Math.abs(shiftX) / 1000}`;
 
       if (shiftX > 50) cardsElement.classList.add("like");
       else if (shiftX < -50) cardsElement.classList.add("dislike");
@@ -152,8 +178,9 @@ const CardStack: React.FC = () => {
       if (Math.abs(shiftX) > 100) {
         handleSwipe(id, shiftX > 0 ? "right" : "left");
       } else {
-        cardsElement.style.transition = "transform 0.3s";
-        cardsElement.style.transform = "";
+        cardsElement.style.transition = "transform 0.3s ease-out, opacity 0.3s ease-out";
+        cardsElement.style.transform = "translateY(0) scale(1)";
+        cardsElement.style.opacity = "1";
         cardsElement.classList.remove("like", "dislike");
       }
     };
