@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NumidexHeader from '../components/NumidexHeader';
 import Footer from '../components/Footer';
 import CardStack from '../components/CardStack';
-import CardFooter from '../components/CardFooter';
+// import CardFooter from '../components/CardFooter';
 import PokedexButton from '../components/PokedexButton';
 import TagSelector from '../components/TagSelector';
 import TagModal from '../components/TagModal';
@@ -25,11 +25,7 @@ const SwipeInterface: React.FC = () => {
           <CardStack />
         </div>
       </main>
-      <CardFooter />
-      <TagSelector
-        selectedTags={selectedTags}
-        onTagClick={() => setIsTagModalOpen(true)}
-      />
+      {/* <CardFooter /> */}
       <PokedexButton />
       <Footer />
       <TagModal

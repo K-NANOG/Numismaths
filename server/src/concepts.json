@@ -232,5 +232,35 @@
     "visuals": [],
     "difficulty": "Intermediate",
     "tags": []
+  },
+  {
+    "id": "concept_020",
+    "name": "Nanoparticle–biomolecule conjugate",
+    "category": "",
+    "description": "A nanoparticle–biomolecule conjugate is a nanoparticle with biomolecules attached to its surface.  Nanoparticles are minuscule particles, typically measured in nanometers (nm), that are used in nanobiotechnology to explore the functions of biomolecules. Properties of the ultrafine particles are characterized by the components on their surfaces more so than larger...",
+    "fullArticle": "A nanoparticle–biomolecule conjugate is a nanoparticle with biomolecules attached to its surface.  Nanoparticles are minuscule particles, typically measured in nanometers (nm), that are used in nanobiotechnology to explore the functions of biomolecules. Properties of the ultrafine particles are characterized by the components on their surfaces more so than larger structures, such as cells, due to large surface area-to-volume ratios. Large surface area-to-volume-ratios of nanoparticles optimize the potential for interactions with biomolecules.\n\n",
+    "pageUrl": "https://en.wikipedia.org/wiki/Nanoparticle%E2%80%93biomolecule_conjugate",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Nanomedicine",
+      "Nanobiotechnology",
+      "Brain-Machine Interfaces"
+    ]
+  },
+  {
+    "id": "concept_021",
+    "name": "Nanoreactor",
+    "category": "",
+    "description": "Nanoreactors are a form of chemical reactor that are particularly in the disciplines of nanotechnology and nanobiotechnology. These special reactors are crucial in maintaining a working nanofoundry; which is essentially a foundry that manufactures products on a nanotechnological scale.",
+    "fullArticle": "Nanoreactors are a form of chemical reactor that are particularly in the disciplines of nanotechnology and nanobiotechnology. These special reactors are crucial in maintaining a working nanofoundry; which is essentially a foundry that manufactures products on a nanotechnological scale.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Nanoreactor",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Nanomedicine",
+      "Nanobiotechnology",
+      "Brain-Machine Interfaces"
+    ]
   }
 ]

@@ -234,6 +234,9 @@ p {
 /* Utilities */
 .text-center {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .mt-1 { margin-top: var(--spacing-xs); }
@@ -361,24 +364,79 @@ p {
   color: var(--blue);
 }
 
-.swipe-instructions {
-  position: fixed;
-  bottom: 2rem;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: var(--gray);
-  font-size: 1rem;
-  font-weight: 500;
-  opacity: 0.8;
+/* Swipe Instructions Footer */
+/* Commented out swipe instructions
+.swipe-footer {
+  width: 100%;
+  background-color: var(--white);
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--border-radius-md);
 }
 
-.swipe-arrow {
-  display: inline-block;
-  margin: 0 0.5rem;
-  font-weight: bold;
-  color: var(--secondary);
+.swipe-instructions {
+  position: static;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  font-size: var(--font-size-base);
+  color: var(--text-primary);
+  opacity: 1;
 }
+
+.instruction-left {
+  position: relative;
+  padding-left: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.instruction-left::before {
+  content: "←";
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+  color: var(--danger);
+  line-height: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.instruction-right {
+  position: relative;
+  padding-right: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.instruction-right::after {
+  content: "→";
+  position: absolute;
+  right: 0;
+  font-size: 1.2em;
+  color: var(--success);
+  line-height: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.instruction-divider {
+  margin: 0 var(--spacing-md);
+  color: var(--gray);
+  font-weight: 300;
+}
+
+@media (max-width: 576px) {
+  .swipe-instructions {
+    font-size: 0.9rem;
+    gap: var(--spacing-sm);
+  }
+}
+*/
 
 /* Card Stack Container */
 .card-stack-container {
@@ -523,11 +581,24 @@ p {
 }
 
 /* Empty State */
-.empty-state {
+.text-center {
   text-align: center;
-  color: var(--gray);
-  font-size: 1.2rem;
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.text-center .wikipedia-search {
+  margin-top: 0;
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: var(--box-shadow-soft);
+}
+
+.text-center .mt-5 {
+  margin-top: 3rem !important;
+  padding-bottom: 2rem;
 }
 
 /* Grid System */
@@ -1110,99 +1181,25 @@ p {
   color: var(--white);
 }
 
-/* Swipe Instructions Footer */
-.swipe-footer {
-  width: 100%;
-  background-color: var(--white);
-  padding: var(--spacing-md);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: var(--spacing-xl) 0;
-  border-radius: var(--border-radius-md);
-}
-
-.swipe-instructions {
-  position: static;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-md);
-  font-size: var(--font-size-base);
-  color: var(--text-primary);
-  opacity: 1;
-}
-
-.instruction-left {
-  position: relative;
-  padding-left: 24px;
-  display: flex;
-  align-items: center;
-}
-
-.instruction-left::before {
-  content: "←";
-  position: absolute;
-  left: 0;
-  font-size: 1.2em;
-  color: var(--danger);
-  line-height: 1;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.instruction-right {
-  position: relative;
-  padding-right: 24px;
-  display: flex;
-  align-items: center;
-}
-
-.instruction-right::after {
-  content: "→";
-  position: absolute;
-  right: 0;
-  font-size: 1.2em;
-  color: var(--success);
-  line-height: 1;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.instruction-divider {
-  margin: 0 var(--spacing-md);
-  color: var(--gray);
-  font-weight: 300;
-}
-
-@media (max-width: 576px) {
-  .swipe-instructions {
-    font-size: 0.9rem;
-    gap: var(--spacing-sm);
-  }
-}
-
 /* Modal Styles */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1050;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  outline: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(230, 231, 238, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1050;
 }
 
 .modal-dialog {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  margin: 1.75rem;
+  max-width: 500px;
+  margin: 1.75rem auto;
   pointer-events: none;
 }
 
@@ -1348,4 +1345,92 @@ p {
 /* Modal Backdrop - removed since we're using a semi-transparent modal background */
 .modal-backdrop {
   display: none;
+}
+
+.search-container {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-soft);
+}
+
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.selected-tags .badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--white);
+  color: var(--text-primary);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-soft);
+}
+
+.selected-tags .btn-close {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--text-primary);
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.selected-tags .btn-close:hover {
+  opacity: 1;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+/* Filter Tags Button Styles */
+.filter-tags-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.neumorphic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--white);
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--box-shadow-soft);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.neumorphic-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 8px 8px 16px #b8b9be, -8px -8px 16px #ffffff;
+}
+
+.neumorphic-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--box-shadow-inset);
+}
+
+.neumorphic-btn .fas {
+  margin-right: 0.5rem;
 }

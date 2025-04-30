@@ -20,15 +20,17 @@ const FeaturesSection: React.FC = () => {
   ];
 
   return (
-    <section className="row text-center py-5">
-      {features.map((feature, index) => (
-        <div key={index} className="col-md-4">
-          <div className="card p-4 shadow"> {/*I'm hesitating with className="inset-shadow"*/}
-            <h3 className={feature.colorClass}>{feature.title}</h3>
-            <p>{feature.description}</p>
+    <section className="container-fluid py-5">
+      <div className="d-flex justify-content-center" style={{ gap: '2rem' }}>
+        {features.map((feature, index) => (
+          <div key={index} style={{ width: '360px', margin: '0 1.5rem', flex: '0 0 360px' }}>
+            <div className="card p-4 inset-shadow h-100">
+              <h3 className={`${feature.colorClass} text-center`}>{feature.title}</h3>
+              <p className="mb-0 text-center">{feature.description}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 };

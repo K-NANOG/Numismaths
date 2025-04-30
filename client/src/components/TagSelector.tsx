@@ -8,18 +8,14 @@ interface TagSelectorProps {
 
 const TagSelector: React.FC<TagSelectorProps> = ({ onTagClick, selectedTags }) => {
   return (
-    <div className="nav-wrapper position-relative">
-      <ul className="nav nav-pills">
-        <li className="nav-item">
-          <button 
-            className="nav-link mb-sm-3 mb-md-0" 
-            onClick={onTagClick}
-          >
-            <span className="fas fa-filter mr-2"></span>
-            Filter Tags
-          </button>
-        </li>
-      </ul>
+    <div className="filter-tags-wrapper">
+      <button 
+        className="btn btn-primary neumorphic-btn"
+        onClick={onTagClick}
+      >
+        <span className="fas fa-filter mr-2"></span>
+        Filter Tags
+      </button>
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import React from 'react';
 
+// CardFooter component commented out
 const CardFooter: React.FC = () => {
+  return null;
+  /* Original implementation
   return (
     <footer className="swipe-footer">
       <div className="swipe-instructions">
@@ -14,6 +17,7 @@ const CardFooter: React.FC = () => {
       </div>
     </footer>
   );
+  */
 };
 
 export default CardFooter;

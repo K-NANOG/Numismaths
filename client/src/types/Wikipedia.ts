@@ -51,4 +51,5 @@ export interface ConceptCard {
     description: string;
   }>;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  tags: string[];
 } 

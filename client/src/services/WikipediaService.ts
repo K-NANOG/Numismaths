@@ -1,14 +1,18 @@
 import axios from 'axios';
 import { WikipediaResponse, WikipediaSearchResult, WikipediaPage, WikipediaImage, ConceptCard } from '../types/Wikipedia';
 import { Tag } from '../config/tags';
+import { UserPreferencesService } from './UserPreferencesService';
 
 const WIKIPEDIA_API_URL = 'https://en.wikipedia.org/w/api.php';
 
 export class WikipediaService {
   private static instance: WikipediaService;
   private lastConceptId = 0;
+  private userPreferences: UserPreferencesService;
 
-  private constructor() {}
+  private constructor() {
+    this.userPreferences = UserPreferencesService.getInstance();
+  }
 
   public static getInstance(): WikipediaService {
     if (!WikipediaService.instance) {
@@ -71,9 +75,12 @@ export class WikipediaService {
 
   public async searchArticles(theme: string, tags: Tag[] = [], limit: number = 5): Promise<ConceptCard[]> {
     try {
+      // Use provided tags or fall back to user preferences
+      const searchTags = tags.length > 0 ? tags : this.userPreferences.getSelectedTags();
+      
       // Build search query including tags
-      const tagQuery = tags.length > 0 
-        ? ` ${tags.map(tag => tag.name).join(' OR ')}` 
+      const tagQuery = searchTags.length > 0 
+        ? ` ${searchTags.map(tag => tag.name).join(' OR ')}` 
         : '';
       
       const searchQuery = `${theme}${tagQuery}`;
@@ -127,7 +134,7 @@ export class WikipediaService {
           pageUrl: page.fullurl,
           visuals: [],
           difficulty: this.determineDifficulty(page.extract),
-          tags: tags.map(tag => tag.name)
+          tags: searchTags.map(tag => tag.name)
         };
 
         conceptCards.push(conceptCard);

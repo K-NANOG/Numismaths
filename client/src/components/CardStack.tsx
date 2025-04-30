@@ -213,6 +213,25 @@ const CardStack: React.FC = () => {
     };
   }, [concepts, setupSwipeHandlers]);
 
+  // Add keyboard event handler
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isAnimating || savingLike || concepts.length === 0) return;
+      
+      const topCard = concepts[0];
+      if (!topCard) return;
+
+      if (e.key === "ArrowLeft") {
+        handleSwipe(topCard.id, "left");
+      } else if (e.key === "ArrowRight") {
+        handleSwipe(topCard.id, "right");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [concepts, handleSwipe, isAnimating, savingLike]);
+
   if (loading) {
     return (
       <div className="cards-container">
@@ -239,14 +258,15 @@ const CardStack: React.FC = () => {
   }
 
   return (
-    <div id="cards-container" className="cards-container">
+    <div 
+      id="cards-container" 
+      className="cards-container"
+      tabIndex={0} // Make container focusable
+      aria-label="Card stack. Use left arrow to skip, right arrow to save."
+    >
       {concepts.length === 0 ? (
         <div className="text-center">
-          <p>No more concepts to explore!</p>
           <WikipediaSearch onNewCards={handleNewCards} />
-          <button className="btn btn-primary mt-3" onClick={() => loadConcepts()}>
-            Start Over
-          </button>
         </div>
       ) : (
         <>
