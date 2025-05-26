@@ -1,1 +1,266 @@
-[]
+[
+  {
+    "id": "concept_001",
+    "name": "Ramsey Theory",
+    "category": "Graph Theory and Combinatorics",
+    "description": "Ramsey theory states that complete disorder is impossible. It explores how order emerges in large enough structures.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/RamseyGraph_1000.gif",
+        "description": "Visualization of Ramsey numbers."
+      }
+    ],
+    "difficulty": "Intermediate",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ramsey_theory"
+  },
+  {
+    "id": "concept_002",
+    "name": "Splines",
+    "category": "Geometry and Curves",
+    "description": "Splines are smooth curves used in computer graphics and interpolation.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/BicubicSpline_1000.gif",
+        "description": "Example of bicubic splines."
+      }
+    ],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spline_(mathematics)"
+  },
+  {
+    "id": "concept_003",
+    "name": "Prime Numbers",
+    "category": "Number Theory",
+    "description": "Prime numbers are integers greater than 1 that have no divisors other than 1 and themselves.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/PrimeNumbers_700.gif",
+        "description": "Visualization of prime numbers."
+      }
+    ],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Prime_number"
+  },
+  {
+    "id": "concept_004",
+    "name": "Pigeonhole Principle",
+    "category": "Combinatorics",
+    "description": "The principle stating that if n items are placed in m containers, where n > m, at least one container must hold more than one item.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/Pigeonhole_1000.gif",
+        "description": "Visual representation of the pigeonhole principle."
+      }
+    ],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pigeonhole_principle"
+  },
+  {
+    "id": "concept_005",
+    "name": "Monte Carlo Method",
+    "category": "Probability and Statistics",
+    "description": "A computational algorithm that uses random sampling to obtain numerical results and solve problems that might be deterministic in principle.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/MonteCarloSimulation_1000.gif",
+        "description": "Monte Carlo simulation example."
+      }
+    ],
+    "difficulty": "Intermediate",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Monte_Carlo_method"
+  },
+  {
+    "id": "concept_006",
+    "name": "No-Free-Lunch Theorem",
+    "category": "Optimization and Machine Learning",
+    "description": "A theorem stating that no optimization algorithm performs better than others when performance is averaged across all possible problems.",
+    "visuals": [
+      {
+        "type": "diagram",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/NoFreeLunchTheorem_1000.gif",
+        "description": "Visualization of the No-Free-Lunch theorem."
+      }
+    ],
+    "difficulty": "Advanced",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/No_free_lunch_theorem"
+  },
+  {
+    "id": "concept_007",
+    "name": "Four Color Theorem",
+    "category": "Graph Theory",
+    "description": "The theorem stating that any map can be colored using no more than four colors such that no two adjacent regions share the same color.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/FourColorTheorem_1000.gif",
+        "description": "Illustration of the Four Color Theorem."
+      }
+    ],
+    "difficulty": "Intermediate",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Four_color_theorem"
+  },
+  {
+    "id": "concept_008",
+    "name": "Bayesian Inference",
+    "category": "Probability and Statistics",
+    "description": "A method of statistical inference that updates the probability for a hypothesis as more evidence or information becomes available.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/BayesianInference_1000.gif",
+        "description": "Graphical model of Bayesian inference."
+      }
+    ],
+    "difficulty": "Intermediate",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bayesian_inference"
+  },
+  {
+    "id": "concept_009",
+    "name": "Markov Chains",
+    "category": "Probability and Statistics",
+    "description": "A stochastic process that undergoes transitions from one state to another based on certain probabilistic rules.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/MarkovChain_1000.gif",
+        "description": "Visualization of a Markov chain."
+      }
+    ],
+    "difficulty": "Intermediate",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Markov_chain"
+  },
+  {
+    "id": "concept_010",
+    "name": "Euler's Identity",
+    "category": "Complex Analysis",
+    "description": "The mathematical formula e^(iπ) + 1 = 0, which is considered one of the most beautiful equations in mathematics.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://mathworld.wolfram.com/images/eps-gif/EulersIdentity_1000.gif",
+        "description": "Graphical representation of Euler's Identity."
+      }
+    ],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Euler%27s_identity"
+  },
+  {
+    "id": "concept_011",
+    "name": "Artificial life",
+    "category": "Alife",
+    "description": "Artificial life (ALife or A-Life) is a field of study wherein researchers examine systems related to natural life, its processes, and its evolution.",
+    "visuals": [
+      {
+        "type": "image",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Unevolved_swimbots_showing_genetic_diversity.png/330px-Unevolved_swimbots_showing_genetic_diversity.png",
+        "description": "Image related to Artificial life"
+      }
+    ],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Artificial_life"
+  },
+  {
+    "id": "concept_012",
+    "name": "Synthetic biology",
+    "category": "synthetic biology",
+    "description": "Synthetic biology (SynBio) is a multidisciplinary field of science that focuses on living systems and organisms.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Synthetic_biology"
+  },
+  {
+    "id": "concept_013",
+    "name": "Geomelting",
+    "category": "geomelting",
+    "description": "GeoMelt is a process by which dangerous, contaminated material is mixed with clean soil and melted to create a leach-resistant glass product.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Geomelting"
+  },
+  {
+    "id": "concept_014",
+    "name": "Transdifferentiation",
+    "category": "transdifferentiation",
+    "description": "Transdifferentiation is the process in which one mature somatic cell is transformed into another mature somatic cell without an intermediate state.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Transdifferentiation"
+  },
+  {
+    "id": "concept_015",
+    "name": "Turritopsis dohrnii",
+    "category": "transdifferentiation",
+    "description": "Turritopsis dohrnii, also known as the immortal jellyfish, is a species of small, biologically immortal jellyfish.",
+    "visuals": [],
+    "difficulty": "Intermediate",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Turritopsis_dohrnii"
+  },
+  {
+    "id": "concept_016",
+    "name": "Dedifferentiation",
+    "category": "transdifferentiation",
+    "description": "Dedifferentiation is a process by which cells become less specialized and return to an earlier cell state within the same lineage.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cellular_differentiation#Dedifferentiation"
+  },
+  {
+    "id": "concept_017",
+    "name": "Metaplasia",
+    "category": "transdifferentiation",
+    "description": "Metaplasia is the transformation of one differentiated cell type to another differentiated cell type.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Metaplasia"
+  },
+  {
+    "id": "concept_018",
+    "name": "Biological immortality",
+    "category": "biology",
+    "description": "Biological immortality is a state in which the rate of mortality from senescence is stable or decreasing.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Biological_immortality"
+  },
+  {
+    "id": "concept_019",
+    "name": "Intelligent design",
+    "category": "design",
+    "description": "Intelligent design is a pseudoscientific argument for the existence of God, presented by its proponents as an evidence-based scientific theory.",
+    "visuals": [],
+    "difficulty": "Intermediate",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Intelligent_design"
+  },
+  {
+    "id": "concept_020",
+    "name": "Nanoparticle-biomolecule conjugate",
+    "category": "nanotechnology",
+    "description": "A nanoparticle-biomolecule conjugate is a nanoparticle with biomolecules attached to its surface.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nanoparticle-biomolecule_conjugate"
+  },
+  {
+    "id": "concept_021",
+    "name": "Nanoreactor",
+    "category": "nanotechnology",
+    "description": "Nanoreactors are chemical reactors that operate at the nanoscale, crucial for nanofoundry operations.",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nanoreactor"
+  },
+  {
+    "id": "concept_022",
+    "name": "Mind uploading",
+    "category": "neuroscience",
+    "description": "Mind uploading is the hypothetical process of scanning and transferring a conscious mind from a brain to a computer.",
+    "visuals": [],
+    "difficulty": "Advanced",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mind_uploading"
+  }
+]

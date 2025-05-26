@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import Spacer from "./Spacer";
-import WikipediaSearch from "./WikipediaSearch";
 import "../styles.css";
 
 interface Concept {
@@ -18,47 +17,29 @@ interface Concept {
   }>;
 }
 
-type SwipeAction = {
-  id: string;
-  direction: "left" | "right";
-  timestamp: number;
+type CardStackProps = {
+  concepts: Concept[];
+  setConcepts: React.Dispatch<React.SetStateAction<Concept[]>>;
+  selectedTags: any[];
+  fetchMoreConcepts: () => Promise<void>;
 };
 
-const CardStack: React.FC = () => {
-  const [concepts, setConcepts] = useState<Concept[]>([]);
-  const [loading, setLoading] = useState(true);
+const CardStack: React.FC<CardStackProps> = ({ concepts, setConcepts, selectedTags, fetchMoreConcepts }) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [savingLike, setSavingLike] = useState(false);
+  const isFetching = useRef(false);
 
-  const loadConcepts = useCallback(async () => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await fetch("http://localhost:8080/api/concepts");
-      if (!response.ok) throw new Error("Failed to fetch concepts");
-      const data = await response.json();
-      setConcepts(data);
-    } catch (error) {
-      console.error("Error loading concepts:", error);
-      setError("Failed to load concepts. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
+  // Infinite stack: fetch more when <3 cards left
   useEffect(() => {
-    loadConcepts();
-  }, [loadConcepts]);
-
-  const handleNewCards = (newCards: Concept[]) => {
-    // Add temporary IDs to new cards from Wikipedia
-    const cardsWithTempIds = newCards.map((card, index) => ({
-      ...card,
-      id: `temp_${Date.now()}_${index}`
-    }));
-    setConcepts(prev => [...prev, ...cardsWithTempIds]);
-  };
+    if (concepts.length < 3 && !isFetching.current) {
+      isFetching.current = true;
+      fetchMoreConcepts().finally(() => {
+        isFetching.current = false;
+      });
+    }
+  }, [concepts, fetchMoreConcepts]);
 
   const handleSwipe = useCallback(async (id: string, direction: "left" | "right") => {
     if (isAnimating || savingLike) return;
@@ -140,7 +121,7 @@ const CardStack: React.FC = () => {
       setIsAnimating(false);
       setSavingLike(false);
     }
-  }, [concepts, isAnimating, savingLike]);
+  }, [concepts, isAnimating, savingLike, setConcepts]);
 
   const setupSwipeHandlers = useCallback((cardsElement: HTMLDivElement, id: string) => {
     let startX = 0;
@@ -232,31 +213,6 @@ const CardStack: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [concepts, handleSwipe, isAnimating, savingLike]);
 
-  if (loading) {
-    return (
-      <div className="cards-container">
-        <div className="text-center">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading concepts...</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="cards-container">
-        <div className="text-center">
-          <p className="text-danger mb-3">{error}</p>
-          <button className="btn btn-primary" onClick={() => loadConcepts()}>
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div 
       id="cards-container" 
@@ -266,34 +222,31 @@ const CardStack: React.FC = () => {
     >
       {concepts.length === 0 ? (
         <div className="text-center">
-          <WikipediaSearch onNewCards={handleNewCards} />
+          <p>No concepts to show. Use the search above to add more.</p>
         </div>
       ) : (
-        <>
-          {concepts.map((concept, index) => (
-            <div
-              key={concept.id}
-              data-id={concept.id}
-              className="cards"
-              style={{ zIndex: concepts.length - index }}
-            >
-              <div className="cards-content">
-                <h2>{concept.name}</h2>
-                <p>{concept.description}</p>
-              </div>
-              <div className="cards-tags">
-                <span className="badge badge-info">
-                  {concept.category}
-                </span>
-                <Spacer size="sm" direction="vertical" />
-                <span className={`badge badge-${concept.difficulty.toLowerCase()}`}>
-                  {concept.difficulty}
-                </span>
-              </div>
+        concepts.map((concept, index) => (
+          <div
+            key={concept.id}
+            data-id={concept.id}
+            className="cards"
+            style={{ zIndex: concepts.length - index }}
+          >
+            <div className="cards-content">
+              <h2>{concept.name}</h2>
+              <p>{concept.description}</p>
             </div>
-          ))}
-          <WikipediaSearch onNewCards={handleNewCards} />
-        </>
+            <div className="cards-tags">
+              <span className="badge badge-info">
+                {concept.category}
+              </span>
+              <Spacer size="sm" direction="vertical" />
+              <span className={`badge badge-${concept.difficulty.toLowerCase()}`}>
+                {concept.difficulty}
+              </span>
+            </div>
+          </div>
+        ))
       )}
     </div>
   );

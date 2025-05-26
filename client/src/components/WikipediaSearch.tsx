@@ -7,7 +7,7 @@ import TagModal from './TagModal';
 import '../styles.css';
 
 interface WikipediaSearchProps {
-  onNewCards: (cards: ConceptCard[]) => void;
+  onNewCards: (cards: ConceptCard[], theme: string, offset: number, tags: Tag[]) => void;
 }
 
 const WikipediaSearch: React.FC<WikipediaSearchProps> = ({ onNewCards }) => {
@@ -30,7 +30,7 @@ const WikipediaSearch: React.FC<WikipediaSearchProps> = ({ onNewCards }) => {
     try {
       const wikipediaService = WikipediaService.getInstance();
       const cards = await wikipediaService.searchArticles(theme, selectedTags);
-      onNewCards(cards);
+      onNewCards(cards, theme, 0, selectedTags);
       setTheme('');
     } catch (err) {
       setError('Failed to fetch articles. Please try again.');

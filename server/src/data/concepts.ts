@@ -11,6 +11,9 @@ interface Concept {
   description: string;
   visuals: Visual[];
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  wikipediaUrl?: string;
+  pageUrl?: string; // For backward compatibility
+  fullArticle?: string;
 }
 
 export const concepts: Concept[] = [
