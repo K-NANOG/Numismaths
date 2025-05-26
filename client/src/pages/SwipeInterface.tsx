@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import NumidexHeader from '../components/NumidexHeader';
 import Footer from '../components/Footer';
 import CardStack from '../components/CardStack';
@@ -24,6 +24,23 @@ const SwipeInterface: React.FC = () => {
   const [searchTags, setSearchTags] = useState<Tag[]>([]);
   const seenUrls = useRef<Set<string>>(new Set());
   const isFetching = useRef(false);
+  const [likedConcepts, setLikedConcepts] = useState<Set<string>>(new Set());
+  const justLiked = useRef<Set<string>>(new Set());
+
+  // Fetch liked concepts on mount
+  useEffect(() => {
+    const fetchLikedConcepts = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/liked-concepts');
+        if (!response.ok) throw new Error('Failed to fetch liked concepts');
+        const data = await response.json();
+        setLikedConcepts(new Set(data.map((c: any) => c.id)));
+      } catch (err) {
+        console.error('Error fetching liked concepts:', err);
+      }
+    };
+    fetchLikedConcepts();
+  }, []);
 
   const handleTagSelection = (tags: Tag[]) => {
     setSelectedTags(tags);
@@ -35,6 +52,11 @@ const SwipeInterface: React.FC = () => {
     fetchMoreConcepts(tags, theme, 0);
   };
 
+  const onConceptLiked = useCallback((conceptId: string) => {
+    setLikedConcepts(prev => new Set([...prev, conceptId]));
+    justLiked.current.add(conceptId);
+  }, []);
+
   const handleNewCards = (newCards: any[], newTheme?: string, newOffset?: number, newTags?: Tag[]) => {
     // If this is a new search (theme or tags changed), reset everything
     if (newTheme !== undefined || newTags !== undefined) {
@@ -45,9 +67,14 @@ const SwipeInterface: React.FC = () => {
       if (newTheme !== undefined) setSearchTheme(newTheme);
       if (newTags !== undefined) setSearchTags(newTags);
     }
-    // Filter out already seen concepts by pageUrl
+    // Filter out already seen concepts by pageUrl AND liked concepts AND just liked
     const beforeDedup = newCards.length;
-    const filtered = newCards.filter(card => card.pageUrl && !seenUrls.current.has(card.pageUrl));
+    const filtered = newCards.filter(card => 
+      card.pageUrl && 
+      !seenUrls.current.has(card.pageUrl) &&
+      !likedConcepts.has(card.id) &&
+      !justLiked.current.has(card.id)
+    );
     filtered.forEach(card => {
       if (card.pageUrl) seenUrls.current.add(card.pageUrl);
     });
@@ -92,6 +119,13 @@ const SwipeInterface: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [concepts, searchTags, searchTheme, searchOffset, noMoreResults]);
 
+  // After concepts update, clear justLiked set (so it only blocks the next batch)
+  useEffect(() => {
+    if (justLiked.current.size > 0) {
+      justLiked.current.clear();
+    }
+  }, [concepts]);
+
   return (
     <div className="card-stack">
       <NumidexHeader />
@@ -110,6 +144,8 @@ const SwipeInterface: React.FC = () => {
             setConcepts={setConcepts} 
             selectedTags={searchTags}
             fetchMoreConcepts={() => fetchMoreConcepts(searchTags, searchTheme, searchOffset)}
+            likedConcepts={likedConcepts}
+            onConceptLiked={onConceptLiked}
           />
         </div>
       </main>

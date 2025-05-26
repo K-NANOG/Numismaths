@@ -79,6 +79,27 @@ export class ConceptService {
         this.concepts = JSON.parse(conceptsData);
         const likedIds = JSON.parse(likedConceptsData);
         this.likedConceptIds = new Set(likedIds);
+
+        // *** De-duplication Logic ***
+        const seenConcepts = new Map<string, Concept>();
+        this.concepts = this.concepts.filter(concept => {
+          const uniqueKey = concept.pageUrl || `${concept.name}-${concept.description}`;
+          if (!seenConcepts.has(uniqueKey)) {
+            seenConcepts.set(uniqueKey, concept);
+            return true; // Keep this concept
+          } else {
+            // If a duplicate is found, and the duplicate's ID is in the liked list,
+            // we should update the liked list to use the original concept's ID.
+            const existingConcept = seenConcepts.get(uniqueKey)!;
+            if (this.likedConceptIds.has(concept.id)) {
+              this.likedConceptIds.delete(concept.id);
+              this.likedConceptIds.add(existingConcept.id);
+            }
+            return false; // Filter out this duplicate
+          }
+        });
+        // *** End De-duplication Logic ***
+
       } catch (parseError) {
         console.error('Error parsing JSON data:', parseError);
         // If JSON is invalid, initialize with empty data
@@ -128,9 +149,14 @@ export class ConceptService {
   async addNewConcept(concept: Concept): Promise<void> {
     try {
       await this.initialized;
-      const existingIndex = this.concepts.findIndex(c => c.id === concept.id);
+      // Check if a concept with the same pageUrl already exists (for Wikipedia concepts)
+      const existingIndex = this.concepts.findIndex(c => c.pageUrl && c.pageUrl === concept.pageUrl);
       
       if (existingIndex === -1) {
+        // If it's a new concept, ensure it has a unique ID
+        if (!concept.id) {
+          concept.id = await this.getNextConceptId();
+        }
         this.concepts.push(concept);
       } else {
         this.concepts[existingIndex] = concept;
@@ -146,6 +172,12 @@ export class ConceptService {
   async saveLikedConcept(conceptId: string, newConcept?: Concept): Promise<void> {
     try {
       await this.initialized;
+      
+      // Check if concept is already liked
+      if (this.likedConceptIds.has(conceptId)) {
+        throw new Error('Concept is already in your numidex');
+      }
+
       if (newConcept) {
         await this.addNewConcept(newConcept);
       }
@@ -154,7 +186,7 @@ export class ConceptService {
       await this.saveToFile();
     } catch (error) {
       console.error('Error saving liked concept:', error);
-      throw new Error('Failed to save liked concept');
+      throw error;
     }
   }
 

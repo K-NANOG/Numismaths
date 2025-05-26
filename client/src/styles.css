@@ -1434,3 +1434,9 @@ p {
 .neumorphic-btn .fas {
   margin-right: 0.5rem;
 }
+
+.loading-indicator {
+  text-align: center;
+  padding: 1rem;
+  color: #888; /* Or your preferred loading color */
+}

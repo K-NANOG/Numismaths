@@ -22,9 +22,11 @@ type CardStackProps = {
   setConcepts: React.Dispatch<React.SetStateAction<Concept[]>>;
   selectedTags: any[];
   fetchMoreConcepts: () => Promise<void>;
+  likedConcepts: Set<string>;
+  onConceptLiked: (conceptId: string) => void;
 };
 
-const CardStack: React.FC<CardStackProps> = ({ concepts, setConcepts, selectedTags, fetchMoreConcepts }) => {
+const CardStack: React.FC<CardStackProps> = ({ concepts, setConcepts, selectedTags, fetchMoreConcepts, likedConcepts, onConceptLiked }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -62,7 +64,7 @@ const CardStack: React.FC<CardStackProps> = ({ concepts, setConcepts, selectedTa
       cardElement.style.opacity = "0";
 
       // Animate remaining cards up
-      const remainingCards = document.querySelectorAll<HTMLDivElement>(`.cards:not([data-id="${id}"])`);
+      const remainingCards = document.querySelectorAll<HTMLDivElement>(`.cards:not([data-id=\"${id}\"] )`);
       remainingCards.forEach((card, index) => {
         card.style.transition = "all 0.4s ease-out";
         if (index === 0) {
@@ -83,45 +85,58 @@ const CardStack: React.FC<CardStackProps> = ({ concepts, setConcepts, selectedTa
         }
       });
 
-      // If swiped right, save to liked concepts
-      if (direction === "right") {
-        setSavingLike(true);
-        const response = await fetch("http://localhost:8080/api/save-liked", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            id,
-            concept: id.startsWith('temp_') ? currentConcept : undefined
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`Failed to save liked concept: ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        if (data.newId) {
-          currentConcept.id = data.newId;
-        }
-      }
-
       // Wait for animation to complete
       await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // Update state
+
+      // Remove the card from the stack after animation
       setConcepts(prev => prev.filter(concept => concept.id !== id));
+
+      // If swiped right, save to liked concepts (do not block UI)
+      if (direction === "right") {
+        setSavingLike(true);
+        try {
+          const response = await fetch("http://localhost:8080/api/save-liked", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id,
+              concept: currentConcept
+            }),
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || response.statusText);
+          }
+
+          const data = await response.json();
+          if (data.newId && data.newId !== id) {
+            setConcepts(prev => prev.map(concept =>
+              concept.id === id ? { ...concept, id: data.newId } : concept
+            ));
+          }
+          // Add to liked concepts set
+          onConceptLiked(id);
+        } catch (error) {
+          if (error instanceof Error && error.message === 'Concept is already in your numidex') {
+            setError('This concept is already in your numidex');
+          } else {
+            throw error;
+          }
+        }
+      }
     } catch (error) {
       console.error("Error during swipe:", error);
       // Reset card position on error
       cardElement.style.transition = "transform 0.3s ease-out, opacity 0.3s ease-out";
       cardElement.style.transform = "translateY(0) scale(1)";
       cardElement.style.opacity = "1";
-      setError("Failed to process swipe action. Please try again.");
+      setError(error instanceof Error ? error.message : "Failed to process swipe action. Please try again.");
     } finally {
       setIsAnimating(false);
       setSavingLike(false);
     }
-  }, [concepts, isAnimating, savingLike, setConcepts]);
+  }, [concepts, isAnimating, savingLike, setConcepts, onConceptLiked]);
 
   const setupSwipeHandlers = useCallback((cardsElement: HTMLDivElement, id: string) => {
     let startX = 0;
