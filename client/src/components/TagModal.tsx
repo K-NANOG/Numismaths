@@ -30,45 +30,43 @@ const TagModal: React.FC<TagModalProps> = ({ isOpen, onClose, onTagsSelected, se
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h2 className="modal-title">Select Tags</h2>
-            <button type="button" className="close" onClick={onClose}>×</button>
-          </div>
-          <div className="modal-body">
-            {tagCategories.map(category => (
-              <div key={category.id}>
-                <h3>{category.name}</h3>
-                <div className="btn-group-toggle">
-                  {category.tags.map(tag => (
-                    <label
-                      key={tag.id}
-                      className={`btn ${
-                        localSelectedTags.some(t => t.id === tag.id) ? 'active' : ''
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={localSelectedTags.some(t => t.id === tag.id)}
-                        onChange={() => toggleTag(tag)}
-                      />
-                      {tag.name}
-                    </label>
-                  ))}
-                </div>
+    <div className="tag-modal-embedded neumorphic-inset-container">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h2 className="modal-title">Select Tags</h2>
+          <button type="button" className="close" onClick={onClose}>×</button>
+        </div>
+        <div className="modal-body">
+          {tagCategories.map(category => (
+            <div key={category.id}>
+              <h3>{category.name}</h3>
+              <div className="btn-group-toggle">
+                {category.tags.map(tag => (
+                  <label
+                    key={tag.id}
+                    className={`btn ${
+                      localSelectedTags.some(t => t.id === tag.id) ? 'active' : ''
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={localSelectedTags.some(t => t.id === tag.id)}
+                      onChange={() => toggleTag(tag)}
+                    />
+                    {tag.name}
+                  </label>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="modal-footer">
-            <button type="button" className="btn" onClick={handleApply}>
-              Apply
-            </button>
-            <button type="button" className="btn" onClick={onClose}>
-              Cancel
-            </button>
-          </div>
+            </div>
+          ))}
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="btn" onClick={handleApply}>
+            Apply
+          </button>
+          <button type="button" className="btn" onClick={onClose}>
+            Cancel
+          </button>
         </div>
       </div>
     </div>

@@ -632,5 +632,103 @@
       "Nanobiotechnology",
       "Nanorobotics"
     ]
+  },
+  {
+    "id": "concept_067",
+    "name": "Complex system",
+    "category": "Variety (cybernetics)",
+    "description": "A complex system is a system composed of many components which may interact with each other. Examples of complex systems are Earth's global climate, organisms, the human brain, infrastructure such as power grid, transportation or communication systems, complex software and electronic systems, social and economic organizations (like cities), an ecosystem,...",
+    "fullArticle": "A complex system is a system composed of many components which may interact with each other. Examples of complex systems are Earth's global climate, organisms, the human brain, infrastructure such as power grid, transportation or communication systems, complex software and electronic systems, social and economic organizations (like cities), an ecosystem, a living cell, and, ultimately, for some authors, the entire universe.\nThe behavior of a complex system is intrinsically difficult to model due to the dependencies, competitions, relationships, and other types of interactions between their parts or between a given system and its environment. Systems that are \"complex\" have distinct properties that arise from these relationships, such as nonlinearity, emergence, spontaneous order, adaptation, and feedback loops, among others. Because such systems appear in a wide variety of fields, the commonalities among them have become the topic of their independent area of research. In many cases, it is useful to represent such a system as a network where the nodes represent the components and links represent their interactions.\nThe term complex systems often refers to the study of complex systems, which is an approach to science that investigates how relationships between a system's parts give rise to its collective behaviors and how the system interacts and forms relationships with its environment. The study of complex systems regards collective, or system-wide, behaviors as the fundamental object of study; for this reason, complex systems can be understood as an alternative paradigm to reductionism, which attempts to explain systems in terms of their constituent parts and the individual interactions between them.\nAs an interdisciplinary domain, complex systems draw contributions from many different fields, such as the study of self-organization and critical phenomena from physics, of spontaneous order from the social sciences, chaos from mathematics, adaptation from biology, and many others. Complex systems is therefore often used as a broad term encompassing a research approach to problems in many diverse disciplines, including statistical physics, information theory, nonlinear dynamics, anthropology, computer science, meteorology, sociology, economics, psychology, and biology.\n\n",
+    "pageUrl": "https://en.wikipedia.org/wiki/Complex_system",
+    "visuals": [],
+    "difficulty": "Intermediate",
+    "tags": []
+  },
+  {
+    "id": "concept_068",
+    "name": "Pattern formation",
+    "category": "",
+    "description": "The science of pattern formation deals with the visible, (statistically) orderly outcomes of self-organization and the common principles behind similar patterns in nature.\nIn developmental biology, pattern formation refers to the generation of complex organizations of cell fates in space and time. The role of genes in pattern formation is an...",
+    "fullArticle": "The science of pattern formation deals with the visible, (statistically) orderly outcomes of self-organization and the common principles behind similar patterns in nature.\nIn developmental biology, pattern formation refers to the generation of complex organizations of cell fates in space and time. The role of genes in pattern formation is an aspect of morphogenesis, the creation of diverse anatomies from similar genes, now being explored in the science of evolutionary developmental biology or evo-devo. The mechanisms involved are well seen in the anterior-posterior patterning of embryos from the model organism Drosophila melanogaster (a fruit fly), one of the first organisms to have its morphogenesis studied, and in the eyespots of butterflies, whose development is a variant of the standard (fruit fly) mechanism.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Pattern_formation",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Synthetic Biology",
+      "Nanorobotics",
+      "Mathematical Modeling"
+    ]
+  },
+  {
+    "id": "concept_069",
+    "name": "Biofabrication",
+    "category": "",
+    "description": "Biofabrication is a branch of biotechnology specialising in the research and development of biologically engineered processes for the automated production of biologically functional products through bioprinting or bioassembly and subsequent tissue maturation processes; as well as techniques such as directed assembly, which employs localised external stimuli guide the fabrication process;...",
+    "fullArticle": "Biofabrication is a branch of biotechnology specialising in the research and development of biologically engineered processes for the automated production of biologically functional products through bioprinting or bioassembly and subsequent tissue maturation processes; as well as techniques such as directed assembly, which employs localised external stimuli guide the fabrication process; enzymatic assembly, which utilises selective biocatalysts to build macromolecular structures; and self-assembly, in which the biological material guides its own assembly according to its internal information. These processes may facilitate fabrication at the micro- and nanoscales. Biofabricated products are constructed and structurally organised with a range of biological materials including bioactive molecules, biomaterials, living cells, cell aggregates such as micro-tissues and micro-organs on chips, and hybrid cell-material constructs.\nBiofabrication is defined as \"the automated generation of biologically functional products with structural organisation from living cells, bioactive molecules, biomaterials, cell aggregates such as microtissues, or hybrid cell material constructs, through bioprinting or bioassembly and subsequent tissue maturation processes\" by the ISBF (International Society for Biofabrication).",
+    "pageUrl": "https://en.wikipedia.org/wiki/Biofabrication",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Bioengineering",
+      "Nanorobotics"
+    ]
+  },
+  {
+    "id": "concept_070",
+    "name": "Molecular logic gate",
+    "category": "",
+    "description": "A molecular logic gate is a molecule that performs a logical operation based on at least one physical or chemical inputs and a single output. The field has advanced from simple logic systems based on a single chemical or physical input to molecules capable of combinatorial and sequential operations such...",
+    "fullArticle": "A molecular logic gate is a molecule that performs a logical operation based on at least one physical or chemical inputs and a single output. The field has advanced from simple logic systems based on a single chemical or physical input to molecules capable of combinatorial and sequential operations such as arithmetic operations (i.e. moleculators and memory storage algorithms). Molecular logic gates work with input signals based on chemical processes and with output signals based on spectroscopic phenomena.\nLogic gates are the fundamental building blocks of computers, microcontrollers and other electrical circuits that require one or more logical operations. They can be used to construct digital architectures with varying degrees of complexity by a cascade of a few to several million logic gates, and are essentially physical devices that produce a singular binary output after performing logical operations based on Boolean functions on one or more binary inputs. The concept of molecular logic gates, extending the applicability of logic gates to molecules, aims to convert chemical systems into computational units. The field has evolved to realize several practical applications in fields such as molecular electronics, biosensing, DNA computing, nanorobotics, and cell imaging.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Molecular_logic_gate",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Supramolecular Chemistry",
+      "Neuroaesthetics / Neuroplasticity",
+      "Brain-Machine Interfaces"
+    ]
+  },
+  {
+    "id": "concept_071",
+    "name": "Nanosensor",
+    "category": "",
+    "description": "Nanosensors are nanoscale devices that measure physical quantities and convert these to signals that can be detected and analyzed. There are several ways proposed today to make nanosensors; these include top-down lithography, bottom-up assembly, and molecular self-assembly. There are different types of nanosensors in the market and in development for...",
+    "fullArticle": "Nanosensors are nanoscale devices that measure physical quantities and convert these to signals that can be detected and analyzed. There are several ways proposed today to make nanosensors; these include top-down lithography, bottom-up assembly, and molecular self-assembly. There are different types of nanosensors in the market and in development for various applications, most notably in defense, environmental, and healthcare industries. These sensors share the same basic workflow: a selective binding of an analyte, signal generation from the interaction of the nanosensor with the bio-element, and processing of the signal into useful metrics.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Nanosensor",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Nanomedicine",
+      "Supramolecular Chemistry",
+      "Nanorobotics"
+    ]
+  },
+  {
+    "id": "concept_072",
+    "name": "Programmable matter",
+    "category": "",
+    "description": "Programmable matter is matter which has the ability to change its physical properties (shape, density, moduli, conductivity, optical properties, etc.) in a programmable fashion, based upon user input or autonomous sensing.  Programmable matter is thus linked to the concept of a material which inherently has the ability to perform...",
+    "fullArticle": "Programmable matter is matter which has the ability to change its physical properties (shape, density, moduli, conductivity, optical properties, etc.) in a programmable fashion, based upon user input or autonomous sensing.  Programmable matter is thus linked to the concept of a material which inherently has the ability to perform information processing.\n\n",
+    "pageUrl": "https://en.wikipedia.org/wiki/Programmable_matter",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Synthetic Biology",
+      "Multiomics"
+    ]
+  },
+  {
+    "id": "concept_073",
+    "name": "Jeewanu",
+    "category": "",
+    "description": "Jeewanu (Sanskrit for \"particles of life\") are synthetic chemical particles that possess cell-like structure and seem to have some functional properties; that is, they are a model of primitive cells, or protocells. It was first synthesised by Krishna Bahadur (20 January 1926 — 5 August 1994), an Indian chemist and...",
+    "fullArticle": "Jeewanu (Sanskrit for \"particles of life\") are synthetic chemical particles that possess cell-like structure and seem to have some functional properties; that is, they are a model of primitive cells, or protocells. It was first synthesised by Krishna Bahadur (20 January 1926 — 5 August 1994), an Indian chemist and his team in 1963. Using photochemical reaction, they produced coacervates, microscopic cell-like spheres from a mixture of simple organic and inorganic compounds. Bahadur named these particles 'Jeewanu' because they exhibit some of the basic properties of a cell, such as the presence of semipermeable membrane, amino acids, phospholipids and carbohydrates. Further, like living cells, they had several catalytic activities. Jeewanu are cited as models of protocells  for the origin of life, and as artificial cells.",
+    "pageUrl": "https://en.wikipedia.org/wiki/Jeewanu",
+    "visuals": [],
+    "difficulty": "Beginner",
+    "tags": [
+      "Synthetic Biology",
+      "Multiomics"
+    ]
   }
 ]

@@ -9,6 +9,7 @@ import TagModal from '../components/TagModal';
 import { Tag } from '../config/tags';
 import WikipediaSearch from '../components/WikipediaSearch';
 import { WikipediaService } from '../services/WikipediaService';
+import HeatSlider from '../components/HeatSlider';
 
 const BATCH_SIZE = 10;
 const BUFFER_SIZE = 5;
@@ -22,6 +23,7 @@ const SwipeInterface: React.FC = () => {
   const [noMoreResults, setNoMoreResults] = useState(false);
   const [searchTheme, setSearchTheme] = useState('');
   const [searchTags, setSearchTags] = useState<Tag[]>([]);
+  const [heat, setHeat] = useState(50);
   const seenUrls = useRef<Set<string>>(new Set());
   const isFetching = useRef(false);
   const [likedConcepts, setLikedConcepts] = useState<Set<string>>(new Set());
@@ -126,6 +128,18 @@ const SwipeInterface: React.FC = () => {
     }
   }, [concepts]);
 
+  const handleHeatChange = (newHeat: number) => {
+    setHeat(newHeat);
+    // Reset search when heat changes significantly
+    if (Math.abs(newHeat - heat) > 20) {
+      setConcepts([]);
+      seenUrls.current = new Set();
+      setSearchOffset(0);
+      setNoMoreResults(false);
+      fetchMoreConcepts(searchTags, searchTheme, 0);
+    }
+  };
+
   return (
     <div className="card-stack">
       <NumidexHeader />
@@ -134,6 +148,11 @@ const SwipeInterface: React.FC = () => {
           <div className="explore-card neumorphic-card" style={{ maxWidth: 600, width: '100%', margin: '2rem 0', padding: '2.5rem 2rem', borderRadius: '2rem', boxShadow: '8px 8px 24px #e0e2ea, -8px -8px 24px #ffffff' }}>
             <WikipediaSearch onNewCards={(cards, themeFromSearch, _offset, tagsFromSearch) => handleNewCards(cards, themeFromSearch, BATCH_SIZE, tagsFromSearch)} />
           </div>
+          
+          <div style={{ maxWidth: 600, width: '100%', margin: '1rem 0' }}>
+            <HeatSlider onHeatChange={handleHeatChange} initialHeat={heat} />
+          </div>
+
           {noMoreResults && concepts.length === 0 ? (
             <div className="text-center" style={{ color: '#888', marginTop: '2rem' }}>
               <p>No more results available for this search.</p>

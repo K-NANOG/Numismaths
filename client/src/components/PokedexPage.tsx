@@ -37,14 +37,6 @@ const PokedexPage: React.FC = () => {
     fetchLikedConcepts();
   }, [fetchLikedConcepts, lastUpdate]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setLastUpdate(Date.now());
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
   if (loading) {
     return (
       <div className="container mt-4">

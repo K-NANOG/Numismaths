@@ -1440,3 +1440,61 @@ p {
   padding: 1rem;
   color: #888; /* Or your preferred loading color */
 }
+
+/* Inset (carved in) style for toggled neumorphic buttons */
+.neumorphic-btn-inset {
+  box-shadow: var(--box-shadow-inset) !important;
+  transform: translateY(0) !important;
+}
+
+/* Embedded Tag Modal Styles */
+.tag-modal-embedded {
+  width: 100%;
+  max-width: 600px;
+  margin: 1.5rem auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1;
+  position: relative;
+}
+
+.neumorphic-inset-container {
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow-inset);
+  padding: 2rem 1.5rem;
+  margin: 0 auto;
+}
+
+/* Remove modal overlay for embedded modal */
+.tag-modal-embedded .modal-content {
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+
+.tag-modal-embedded .modal-header,
+.tag-modal-embedded .modal-body,
+.tag-modal-embedded .modal-footer {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.tag-modal-embedded .modal-header {
+  padding-top: 0;
+}
+
+.tag-modal-embedded .modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #44476A;
+  margin: 0;
+}
+
+.tag-modal-embedded .close {
+  margin-left: auto;
+}

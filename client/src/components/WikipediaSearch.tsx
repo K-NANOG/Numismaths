@@ -98,15 +98,12 @@ const WikipediaSearch: React.FC<WikipediaSearchProps> = ({ onNewCards }) => {
             onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
           />
           <button
-            className="btn btn-primary"
+            className={`btn btn-primary${loading ? ' neumorphic-btn-inset' : ''}`}
             onClick={handleSearch}
             disabled={loading}
+            aria-pressed={loading}
           >
-            {loading ? (
-              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
-            ) : (
-              'Search'
-            )}
+            Search
           </button>
         </div>
         
@@ -114,15 +111,12 @@ const WikipediaSearch: React.FC<WikipediaSearchProps> = ({ onNewCards }) => {
         
         <TagSelector
           selectedTags={selectedTags}
-          onTagClick={() => setIsTagModalOpen(true)}
+          onTagClick={() => setIsTagModalOpen((open) => !open)}
+          isActive={isTagModalOpen}
         />
       </div>
       
-      {error && (
-        <div className="alert alert-danger mt-3" role="alert">
-          {error}
-        </div>
-      )}
+      {/* Error message intentionally removed as per user request */}
 
       <TagModal
         isOpen={isTagModalOpen}
